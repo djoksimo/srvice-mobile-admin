@@ -1,14 +1,12 @@
-// @flow
-import { BehaviorSubject } from "rxjs";
-import { CacheService, FileService, ServiceService } from "../services";
+import {BehaviorSubject} from 'rxjs';
+import {CacheService, FileService, ServiceService} from '../services';
 
 class ContentManager {
   serviceService: ServiceService;
   cacheService: CacheService;
   fileService: FileService;
-
-  allCategories$: BehaviorSubject;
-  publicPictureUrls$: BehaviorSubject;
+  allCategories$: BehaviorSubject<any>;
+  publicPictureUrls$: BehaviorSubject<any>;
 
   constructor(
     serviceService: ServiceService,
@@ -18,7 +16,6 @@ class ContentManager {
     this.serviceService = serviceService;
     this.fileService = fileService;
     this.cacheService = cacheService;
-
     this.allCategories$ = new BehaviorSubject([]);
     this.publicPictureUrls$ = new BehaviorSubject([]);
   }

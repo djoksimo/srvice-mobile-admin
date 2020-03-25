@@ -1,6 +1,6 @@
-// @flow
-import type { Service } from "types/ServiceType";
-import { ServiceService, CacheService } from "../services";
+import {Service} from 'types/Service';
+import {ServiceService, CacheService} from '../services';
+import {StringMap} from 'types/StringMap';
 
 class ServiceManager {
   serviceService: ServiceService;
@@ -11,15 +11,17 @@ class ServiceManager {
     this.cacheService = cacheService;
   }
 
-  async postService(service: Service): Promise<any> | Service {
+  async postService(service: Service): Promise<Service | Error> {
     try {
       const response = await this.serviceService.postService(
         service,
         await this.cacheService.getAuthHeader(),
       );
+
       if (!response) {
-        return new Error("Something went wrong");
+        return new Error('Something went wrong');
       }
+
       return response;
     } catch (error) {
       return new Error(error.toString());
@@ -32,9 +34,11 @@ class ServiceManager {
         serviceId,
         await this.cacheService.getAuthHeader(),
       );
+
       if (!response) {
-        return new Error("Something went wrong");
+        return new Error('Something went wrong');
       }
+
       return response;
     } catch (error) {
       return new Error(error.toString());
@@ -43,7 +47,7 @@ class ServiceManager {
 
   async updateService(field: string, newData: any, serviceId: string) {
     try {
-      const payload = {
+      const payload: StringMap = {
         _id: serviceId,
       };
       payload[field] = newData;
@@ -51,9 +55,11 @@ class ServiceManager {
         payload,
         await this.cacheService.getAuthHeader(),
       );
+
       if (updateServiceResult.error) {
         throw new Error(updateServiceResult.error);
       }
+
       return updateServiceResult;
     } catch (error) {
       throw new Error(error.toString());

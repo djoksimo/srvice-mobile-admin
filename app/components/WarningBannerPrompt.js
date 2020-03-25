@@ -1,18 +1,18 @@
 // @flow
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
 
-import { Colors, Dimensions } from "values";
-import { Text } from ".";
-import Button from "./Button";
+import {Colors, Dimensions} from 'values';
+import {Text} from '.';
+import Button from './Button';
 
 type Props = {
-  message: string,
-  onPromptPressed: Function,
+  message: string;
+  onPromptPressed: Function;
 };
 
 const WarningBannerPrompt = (props: Props) => {
-  const { message, onPromptPressed } = props;
+  const {message, onPromptPressed} = props;
   return (
     <View style={styles.bannerContainer}>
       <View style={styles.textContainer}>
@@ -38,15 +38,15 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryDark,
     padding: 32,
     // flexDirection: "column",
-    alignSelf: "center",
-    alignItems: "center",
-    alignContent: "center",
+    alignSelf: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
   },
   textContainer: {
-    alignItems: "center",
-    alignSelf: "center",
-    textAlign: "center",
-    alignContent: "center",
+    alignItems: 'center',
+    alignSelf: 'center',
+    textAlign: 'center',
+    alignContent: 'center',
     paddingBottom: 16,
   },
 });

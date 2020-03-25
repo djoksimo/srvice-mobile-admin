@@ -1,6 +1,6 @@
 import {BehaviorSubject} from 'rxjs';
 
-import {Schedule} from 'types/ScheduleType';
+import {Schedule} from 'types/Schedule';
 import {CacheService, ScheduleService} from '../services';
 
 class ScheduleManager {
@@ -29,7 +29,9 @@ class ScheduleManager {
     }
   }
 
-  static createScheduleCopy(currentSchedule: Schedule): Schedule & Object {
+  static createScheduleCopy(
+    currentSchedule: Schedule,
+  ): Schedule & Record<string, any> {
     return Object.assign({}, currentSchedule);
   }
 

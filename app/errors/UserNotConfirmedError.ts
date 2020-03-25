@@ -1,7 +1,7 @@
-import { AuthStatus } from "../enums";
+import {AuthStatus} from '../enums';
 
 class UserNotConfirmedError extends Error {
-  constructor(...params) {
+  constructor(...params: string | any) {
     super(...params);
     this.name = AuthStatus.COGNITO.USER_NOT_CONFIRMED_ERROR;
   }

@@ -5,116 +5,152 @@ import {
   InvalidParameterError,
   CodeMismatchError,
   UserNotFoundError,
-} from "../errors";
-import { AuthStatus } from "../enums";
-
-// TODO: replace this stuff with AWS Amplify -Danilo
-// TODO: implement flow typing -Danilo
+} from '../errors';
+import {AuthStatus} from '../enums'; // TODO: replace this stuff with AWS Amplify -Danilo
 
 class AuthenticationManager {
-  constructor(agentManager, authenticationService, cacheService) {
+  agentManager: any;
+  authenticationService: any;
+  cacheService: any;
+
+  constructor(
+    agentManager: any,
+    authenticationService: any,
+    cacheService: any,
+  ) {
     this.agentManager = agentManager;
     this.authenticationService = authenticationService;
     this.cacheService = cacheService;
-  }
+  } // TODO: this will need to change once we set up agent verification
 
-  // TODO: this will need to change once we set up agent verification
-  async signup(firstName, lastName, email, password) {
+  async signup(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+  ) {
     const payload = {
       email,
       firstName,
       lastName,
       password,
       dateJoined: new Date().toISOString(),
-      profilePictureUrl: "",
+      profilePictureUrl: '',
       services: [],
-      location: "",
+      location: '',
       languages: [],
-      company: "",
+      company: '',
       education: [],
       certifications: [],
-      phone: "123456789", // phone required at the moment based on Mongo schema
-      governmentIdUrl: "",
-      secondaryIdUrl: "",
-      selfieUrl: "",
+      phone: '123456789',
+      // phone required at the moment based on Mongo schema
+      governmentIdUrl: '',
+      secondaryIdUrl: '',
+      selfieUrl: '',
       givenRatings: [],
       bookings: [],
     };
     const response = await this.authenticationService.signup(payload);
+
     if (response.code) {
       switch (response.code) {
-        case "InvalidParameterException":
+        case 'InvalidParameterException':
           throw new InvalidParameterError();
+
         default:
           throw new Error(response.message);
       }
     }
+
     return response;
   }
 
-  async verifyCode(email, code) {
-    const payload = { email, code };
+  async verifyCode(email: string, code: string) {
+    const payload = {
+      email,
+      code,
+    };
     const response = await this.authenticationService.verifyCode(payload);
+
     if (response.code) {
       switch (response.code) {
-        case "ExpiredCodeException":
+        case 'ExpiredCodeException':
           throw new ExpiredCodeError();
-        case "CodeMismatchException":
+
+        case 'CodeMismatchException':
           throw new CodeMismatchError();
+
         default:
           throw new Error(response.message);
       }
     }
+
     await this.rememberAndSetAgent(response.agent, response.token);
   }
 
-  async resendCode(email) {
-    const payload = { email };
+  async resendCode(email: any) {
+    const payload = {
+      email,
+    };
     const response = await this.authenticationService.resendCode(payload);
+
     if (response.code) {
       throw new Error(response.message);
     }
   }
 
-  async login(email, password) {
-    const payload = { email, password };
+  async login(email: string, password: string) {
+    const payload = {
+      email,
+      password,
+    };
     const response = await this.authenticationService.login(payload);
+
     if (response.code) {
       switch (response.code) {
-        case "UserNotConfirmedException":
+        case 'UserNotConfirmedException':
           throw new UserNotConfirmedError();
-        case "NotAuthorizedException":
+
+        case 'NotAuthorizedException':
           throw new NotAuthorizedError();
-        case "UserNotFoundException":
+
+        case 'UserNotFoundException':
           throw new UserNotFoundError();
+
         default:
           throw new Error(response.message);
       }
     }
+
     await this.rememberAndSetAgent(response.agent, response.token);
   }
 
-  async rememberAndSetAgent(agent, token) {
-    await this.cacheService.set("email", agent.email);
-    await this.cacheService.set("agentId", agent._id);
-    await this.cacheService.set("token", token);
+  async rememberAndSetAgent(agent: {email: any; _id: any}, token: any) {
+    await this.cacheService.set('email', agent.email);
+    await this.cacheService.set('agentId', agent._id);
+    await this.cacheService.set('token', token);
     this.agentManager.agent$.next(agent);
   }
 
   async logout() {
-    await this.cacheService.remove("token");
+    await this.cacheService.remove('token');
     this.agentManager.agent$.next(undefined);
   }
 
   async verifyTokenIfExists() {
-    const token = await this.cacheService.get("token");
+    const token = await this.cacheService.get('token');
+
     if (!token) {
       return AuthStatus.NOT_LOGGED_IN;
     }
-    const payload = { token };
+
+    const payload = {
+      token,
+    };
     const response = await this.authenticationService.verifyToken(payload);
+
     if (response.message) {
-      await this.cacheService.remove("token");
+      await this.cacheService.remove('token');
       return AuthStatus.NOT_LOGGED_IN;
     }
 

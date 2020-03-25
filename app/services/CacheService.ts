@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import {AuthHeader} from 'types/AuthHeader';
 
 class CacheService {
   async set(key: string, data: any) {
@@ -13,11 +14,11 @@ class CacheService {
     await AsyncStorage.removeItem(key);
   }
 
-  async getAuthHeader() {
+  async getAuthHeader(): Promise<AuthHeader> {
     return {
-      agentId: await this.get('agentId'),
-      email: await this.get('email'),
-      token: await this.get('token'),
+      agentId: (await this.get('agentId')) ?? '',
+      email: (await this.get('email')) ?? '',
+      token: (await this.get('token')) ?? '',
     };
   }
 }

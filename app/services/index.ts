@@ -6,4 +6,3 @@ export {default as BookingService} from './BookingService';
 export {default as FileService} from './FileService';
 export {default as OfferingService} from './OfferingService';
 export {default as ScheduleService} from './ScheduleService';
-export {default as MessagingService} from './MessagingService';

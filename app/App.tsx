@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { YellowBox } from "react-native";
+import React, {Component} from 'react';
+import {YellowBox} from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator,
   createAppContainer,
-} from "react-navigation";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import RNRestart from "react-native-restart";
+} from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import RNRestart from 'react-native-restart';
 
-import { Colors } from "values";
-import { AlertUtils } from "utils";
+import {Colors} from 'values';
+import {AlertUtils} from 'utils';
 import {
   PostServiceScreen,
   RequestListScreen,
@@ -31,7 +31,7 @@ import {
   RequestResponseScreen,
   EditServiceScreen,
   DashboardScreen,
-} from "./screens";
+} from './screens';
 
 const AuthenticationRoutes = {
   SignupNameScreen: {
@@ -49,8 +49,8 @@ const AuthenticationRoutes = {
 };
 
 const SignupStack = createStackNavigator(AuthenticationRoutes, {
-  initialRouteName: "SignupNameScreen",
-  headerMode: "none",
+  initialRouteName: 'SignupNameScreen',
+  headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,
     swipeEnabled: false,
@@ -58,15 +58,19 @@ const SignupStack = createStackNavigator(AuthenticationRoutes, {
 });
 
 const LoginStack = createStackNavigator(AuthenticationRoutes, {
-  initialRouteName: "LoginScreen",
-  headerMode: "none",
+  initialRouteName: 'LoginScreen',
+  headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,
     swipeEnabled: false,
   },
 });
 
-const renderIcon = (icon, color, active) => {
+const renderIcon = (
+  icon: string,
+  color: string | undefined,
+  active: boolean,
+) => {
   // SOLUTION FOR Background circle
 
   // const iconView = active ? (
@@ -81,7 +85,7 @@ const renderIcon = (icon, color, active) => {
 
   // TODO fix this
   // hacky but functional because calendar-<x>-outline icons don't work for some reason
-  if (icon !== "calendar") {
+  if (icon !== 'calendar') {
     iconName = active ? icon : `${icon}-outline`;
   }
 
@@ -89,6 +93,11 @@ const renderIcon = (icon, color, active) => {
 };
 
 console.disableYellowBox = true;
+
+interface TabBarIconParams {
+  tintColor: string;
+  focused: boolean;
+}
 
 const RootStack = createStackNavigator(
   {
@@ -98,31 +107,33 @@ const RootStack = createStackNavigator(
           DashboardScreen: {
             screen: DashboardScreen,
             navigationOptions: () => ({
-              title: "Dashboard",
-              tabBarIcon: ({ tintColor, focused }) =>
-                renderIcon("view-dashboard", tintColor, focused),
+              title: 'Dashboard',
+              tabBarIcon: ({tintColor, focused}: TabBarIconParams) =>
+                renderIcon('view-dashboard', tintColor, focused),
             }),
           },
           CalendarScreen: {
             screen: CalendarScreen,
             navigationOptions: () => ({
-              title: "Schedule",
-              tabBarIcon: ({ tintColor, focused }) => renderIcon("calendar", tintColor, focused),
+              title: 'Schedule',
+              tabBarIcon: ({tintColor, focused}: TabBarIconParams) =>
+                renderIcon('calendar', tintColor, focused),
             }),
           },
           ConversationListScreen: {
             screen: ConversationListScreen,
             navigationOptions: () => ({
-              title: "Chat",
-              tabBarIcon: ({ tintColor, focused }) =>
-                renderIcon("message-text", tintColor, focused),
+              title: 'Chat',
+              tabBarIcon: ({tintColor, focused}: TabBarIconParams) =>
+                renderIcon('message-text', tintColor, focused),
             }),
           },
           AccountScreen: {
             screen: AccountScreen,
             navigationOptions: () => ({
-              title: "Profile",
-              tabBarIcon: ({ tintColor, focused }) => renderIcon("account", tintColor, focused),
+              title: 'Profile',
+              tabBarIcon: ({tintColor, focused}: TabBarIconParams) =>
+                renderIcon('account', tintColor, focused),
             }),
           },
         },
@@ -192,14 +203,21 @@ const RootStack = createStackNavigator(
     },
   },
   {
-    initialRouteName: "MainTabNavigator",
-    headerMode: "none",
+    initialRouteName: 'MainTabNavigator',
+    headerMode: 'none',
   },
 );
 
 const App = createAppContainer(RootStack);
 
 class AppWrapper extends Component {
+  errorShown: boolean;
+
+  constructor(props: Component['props']) {
+    super(props);
+    this.errorShown = false;
+  }
+
   componentDidCatch() {
     if (__DEV__) {
       return;
@@ -211,11 +229,15 @@ class AppWrapper extends Component {
 
     this.errorShown = true;
 
-    AlertUtils.showSnackBar("Sorry, an unexpected error has occcured.", Colors.secondary, {
-      title: "Reload",
-      color: Colors.white,
-      onPress: () => RNRestart.Restart(),
-    });
+    AlertUtils.showSnackBar(
+      'Sorry, an unexpected error has occcured.',
+      Colors.secondary,
+      {
+        title: 'Reload',
+        color: Colors.white,
+        onPress: () => RNRestart.Restart(),
+      },
+    );
   }
 
   render() {
@@ -223,6 +245,6 @@ class AppWrapper extends Component {
   }
 }
 
-YellowBox.ignoreWarnings(["Remote debugger"]);
+YellowBox.ignoreWarnings(['Remote debugger']);
 
 export default AppWrapper;

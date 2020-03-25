@@ -1,7 +1,7 @@
-import { AuthStatus } from "../enums";
+import {AuthStatus} from '../enums';
 
 class ExpiredCodeError extends Error {
-  constructor(...params) {
+  constructor(...params: string | any) {
     super(...params);
     this.name = AuthStatus.COGNITO.EXPIRED_CODE_ERROR;
   }

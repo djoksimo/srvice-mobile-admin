@@ -38,7 +38,7 @@
     "react-native-snackbar": "^2.2.0",
     "react-native-snap-carousel": "^3.8.4",
     "react-native-vector-icons": "^6.6.0",
-    "react-navigation": "^4.3.3",
+    "react-navigation": "3.11.0",
     "rxjs": "^6.5.4"
   },
   "devDependencies": {

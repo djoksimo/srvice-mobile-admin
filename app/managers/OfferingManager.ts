@@ -1,7 +1,5 @@
-// @flow
 import { BehaviorSubject } from "rxjs";
-
-import type { Offering } from "types/OfferingType";
+import { Offering } from "types/OfferingType";
 import { CacheService, OfferingService } from "../services";
 
 class OfferingManager {
@@ -17,7 +15,7 @@ class OfferingManager {
 
   async createOffering(offering: Offering): Promise<any> {
     try {
-      return this.offeringService.postOffering(offering, await this.cacheService.getAuthHeader());
+      return this.offeringService.postOffering(offering, (await this.cacheService.getAuthHeader()));
     } catch (error) {
       throw new Error(error.toString());
     }
@@ -25,19 +23,22 @@ class OfferingManager {
 
   async deleteOffering(offeringId: string, serviceId: string): Promise<any> | any {
     try {
-      const payload = { offeringId, serviceId };
-      const result = this.offeringService.deleteOffering(
-        payload,
-        await this.cacheService.getAuthHeader(),
-      );
+      const payload = {
+        offeringId,
+        serviceId
+      };
+      const result = this.offeringService.deleteOffering(payload, (await this.cacheService.getAuthHeader()));
+
       if (!result) {
         throw new Error("Failed to delete offering");
       }
+
       return result;
     } catch (error) {
       throw new Error(error.toString());
     }
   }
+
 }
 
 export default OfferingManager;
