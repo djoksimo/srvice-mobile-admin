@@ -1,5 +1,4 @@
 import React from 'react';
-import {Element} from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 import {Colors} from 'values';
@@ -21,13 +20,13 @@ const StepCard = (props: StepCardProps) => {
     isPostButtonPressed,
     isLoading,
   } = props;
-  const imagePicker: Element<any> = (
+  const imagePicker: React.ReactNode = (
     <ImagePickerButton
       pictures={pictures}
       onImagePickerPressed={onImagePickerPressed}
     />
   );
-  const touchableImagePicker: Element<any> | null =
+  const touchableImagePicker: React.ReactNode | null =
     step.id === StepCardId.DESCRIPTION_PICTURES ? imagePicker : null;
   const buttonTitle: string =
     stepNumber + 1 < stepCount ? 'Continue' : 'Post Service';

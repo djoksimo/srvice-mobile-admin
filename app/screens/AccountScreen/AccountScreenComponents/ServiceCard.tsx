@@ -4,13 +4,13 @@ import {NavigationScreenProp} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Text, Stars, Touchable, Card, CategoryIcon} from 'components';
 import {FormatUtils, AlertUtils} from 'utils';
-import {Service} from 'types/ServiceType';
+import {Service} from 'types/Service';
 import {Colors, Max} from 'values';
 import ServiceTimeStamps from 'components/ServiceTimestamps';
 import {TravelSettingOption} from '../../../enums';
 type Props = {
   service: Service;
-  navigation: NavigationScreenProp;
+  navigation: NavigationScreenProp<any, any>;
 };
 
 class ServiceCard extends PureComponent<Props> {
@@ -37,8 +37,6 @@ class ServiceCard extends PureComponent<Props> {
 
     try {
       const sharedRes = await Share.share({
-        subject: messageTitle,
-        dialogTitle: 'Share your service!',
         title: messageTitle,
         message: messageBody,
         url: 'https://srvice.ca',

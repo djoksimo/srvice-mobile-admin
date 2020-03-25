@@ -10,9 +10,7 @@ class BookingManager {
     this.cacheService = cacheService;
   }
 
-  async respondToRequest(
-    bookingRespone: BookingResponse,
-  ): Promise<any> | string {
+  async respondToRequest(bookingRespone: BookingResponse): Promise<any> {
     try {
       const res = await this.bookingService.postRequestResponse(
         bookingRespone,

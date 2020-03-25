@@ -11,7 +11,11 @@ import {
 import {NavigationScreenProp} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Colors} from 'values';
-import {SrviceLogoBetaWhite, SrviceLogoBlue} from '../assets';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const SrviceLogoBetaWhite = require('../../assets/srvice_logo_white.png');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const SrviceLogoBlue = require('../../assets/srvice_blue_400px.png');
+
 import MenuButton from './MenuButton';
 
 interface Props extends ViewProps {

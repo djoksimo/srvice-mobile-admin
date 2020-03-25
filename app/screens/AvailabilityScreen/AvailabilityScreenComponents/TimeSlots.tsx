@@ -13,7 +13,7 @@ type Props = {
 const TimeSlots = (props: Props) => {
   const {slots, onSelectStart, onSelectEnd} = props;
 
-  const Slot = ({slot}) => {
+  const Slot = ({slot}: any) => {
     return (
       <View style={styles.slotContainer}>
         <View style={styles.weekDayContainer}>

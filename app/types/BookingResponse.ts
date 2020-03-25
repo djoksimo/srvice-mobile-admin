@@ -1,5 +1,5 @@
 export interface BookingResponse {
-  _id: string;
+  bookingId: string;
   timeEstimate: number;
   priceEstimate: number;
   agentAccepted: boolean;

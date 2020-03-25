@@ -5,8 +5,8 @@ import {Text, Touchable} from 'components';
 import {Colors} from 'values';
 type Props = {
   title: string;
-  onEditPressed?: Function;
-  onAddPressed?: Function;
+  onEditPressed?: () => void;
+  onAddPressed?: () => void;
 };
 
 class Heading extends PureComponent<Props> {

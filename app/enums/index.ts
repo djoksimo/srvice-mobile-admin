@@ -3,8 +3,5 @@ export {default as ProfileListSetting} from './ProfileListSetting';
 export {default as AuthStatus} from './AuthStatus';
 export {default as StepCardId} from './StepCardId';
 export {default as Day} from './Day';
-export {
-  NotificationKind,
-  NotificationType,
-  NotificationIcon,
-} from './NotificationKind';
+export type {NotificationType} from './NotificationKind';
+export {NotificationKind, NotificationIcon} from './NotificationKind';

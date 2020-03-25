@@ -7,7 +7,7 @@ import {Text} from 'components';
 import Heading from './Heading';
 type Props = {
   skills: Array<string>;
-  onEditPressed: Function;
+  onEditPressed: () => void;
 };
 
 const SkillsSection = (props: Props) => {

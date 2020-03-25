@@ -1,9 +1,9 @@
-class StepCardId {
-  static TITLE = 'title';
-  static DESCRIPTION_PICTURES = 'description-pictures';
-  static ADDRESS = 'address';
-  static TRAVEL_SETTING = 'travel-setting';
-  static CONTACT = 'CONTACT';
+enum StepCardId {
+  TITLE = 'title',
+  DESCRIPTION_PICTURES = 'description-pictures',
+  ADDRESS = 'address',
+  TRAVEL_SETTING = 'travel-setting',
+  CONTACT = 'CONTACT',
 }
 
 export default StepCardId;

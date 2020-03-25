@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
 import {NavigationScreenProp} from 'react-navigation';
-import {Agent} from 'types/AgentType';
+import {Agent} from 'types/Agent';
 import {GradientHeader, Loading} from 'components';
 import Container from 'components/Container';
 import {Colors} from 'values';
@@ -30,7 +30,7 @@ class RequestListScreen extends AgentScreen {
     this.authenticationManager = Bottle.AuthenticationManager;
   }
 
-  async componentDidMount(): any {
+  async componentDidMount() {
     super.componentDidMount();
 
     if (!this.state.agent) {
@@ -48,7 +48,7 @@ class RequestListScreen extends AgentScreen {
     super.componentWillUnmount();
   }
 
-  renderBookingCard = ({item: booking}) => {
+  renderBookingCard = ({item: booking}: any) => {
     const {firstName, lastName, profilePictureUrl} = booking.request.user;
     const {description, _id} = booking.request;
     const {_id: bookingId, userAccepted, agentAccepted} = booking;

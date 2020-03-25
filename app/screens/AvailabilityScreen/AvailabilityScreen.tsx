@@ -6,7 +6,7 @@ import {Card, GradientHeader, Loading, Text} from 'components';
 import Container from 'components/Container';
 import Button from 'components/Button';
 import {Colors} from 'values';
-import {Agent} from 'types/AgentType';
+import {Agent} from 'types/Agent';
 import {AvailabilitySlot} from 'types/AvailabilitySlot';
 import {Day as DayType} from 'types/Day';
 import {AlertUtils} from 'utils';
@@ -16,7 +16,7 @@ import {DefaultAvailability} from './AvailabilityScreenValues';
 import Bottle from '../../bottle';
 import {ScheduleManager} from '../../managers';
 type Props = {
-  navigation: NavigationScreenProp;
+  navigation: NavigationScreenProp<any, any>;
 };
 type State = {
   agent: Agent | any;
@@ -27,17 +27,12 @@ type State = {
   isStartSelected: boolean | any;
 };
 
-class AvailabilityScreen extends AgentScreen {
+export class AvailabilityScreen extends AgentScreen {
   state: State;
   scheduleManager: ScheduleManager;
 
   constructor(props: Props) {
     super(props);
-    this.setInitialStates();
-    this.scheduleManager = Bottle.ScheduleManager;
-  }
-
-  setInitialStates = () => {
     this.state = {
       agent: undefined,
       availability: DefaultAvailability,
@@ -46,7 +41,8 @@ class AvailabilityScreen extends AgentScreen {
       isDateTimePickerVisible: false,
       isLoading: false,
     };
-  };
+    this.scheduleManager = Bottle.ScheduleManager;
+  }
 
   componentDidMount() {
     super.componentDidMount();
@@ -160,7 +156,7 @@ class AvailabilityScreen extends AgentScreen {
             end: endTime,
           };
         });
-      const res = await this.scheduleManager.updateSchedule(
+      await this.scheduleManager.updateSchedule(
         schedule,
         'availability',
         parsedAvailability,
@@ -247,4 +243,3 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 });
-export default AvailabilityScreen;

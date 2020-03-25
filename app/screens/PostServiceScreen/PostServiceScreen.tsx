@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import {StyleSheet, Alert, KeyboardAvoidingView} from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import {NavigationScreenProp} from 'react-navigation';
 import SnapCarousel from 'react-native-snap-carousel';
 import {GradientHeader, Text, Loading} from 'components';
@@ -9,8 +9,8 @@ import Container from 'components/Container';
 import InputLocationModal from 'components/InputLocationModal';
 import {Colors, Dimensions, MinInput} from 'values';
 import {FormatUtils, AlertUtils} from 'utils';
-import {Location} from 'types/LocationType';
-import {Agent} from 'types/AgentType';
+import {Location} from 'types/Location';
+import {Agent} from 'types/Agent';
 import {StepCard} from './StepCard';
 import {Step, TravelSetting} from './StepCard/StepCardTypes';
 import {ContentManager, ServiceManager} from '../../managers';
@@ -55,7 +55,7 @@ type State = {
   isInputLocationModalVisible: boolean;
 };
 
-class PostServiceScreen extends AgentScreen {
+export class PostServiceScreen extends AgentScreen {
   state: State;
   serviceManager: ServiceManager;
   contentManager: ContentManager;
@@ -178,9 +178,12 @@ class PostServiceScreen extends AgentScreen {
 
     return true;
   };
-  onContinuePressed = async (stepId: StepCardId, stepCount: number): void => {
+  onContinuePressed = async (
+    stepId: StepCardId,
+    stepCount: number,
+  ): Promise<any> => {
     const {stepNumber} = this.state;
-    this.setState((prevState) => {
+    this.setState((prevState: State) => {
       const {agent} = prevState;
       const {email} = agent;
       return {
@@ -256,7 +259,7 @@ class PostServiceScreen extends AgentScreen {
       cropping: false,
       multiple: true,
     });
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       pictures: [...prevState.pictures, picture],
     }));
   };
@@ -268,13 +271,13 @@ class PostServiceScreen extends AgentScreen {
       compressImageMaxHeight: 800,
       maxFiles: 20,
     });
-    this.setState((prevState) => ({
-      pictures: [...prevState.pictures, ...pictures],
+    this.setState((prevState: State) => ({
+      pictures: [...prevState.pictures, ...(pictures as Image[])],
     }));
   };
   toggleInputLocationModalVisibility = (onToggleModalDone?: () => void) => {
     this.setState(
-      (prevState) => ({
+      (prevState: State) => ({
         isInputLocationModalVisible: !prevState.isInputLocationModalVisible,
       }),
       () => {
@@ -303,7 +306,7 @@ class PostServiceScreen extends AgentScreen {
     switch (travelSetting.title) {
       case TravelSettingOption.TRAVEL_SETTING_OUTCALL:
         this.setState(
-          (prevState) => ({
+          (prevState: State) => ({
             outCall: !prevState.outCall,
           }),
           () => {
@@ -319,7 +322,7 @@ class PostServiceScreen extends AgentScreen {
 
       case TravelSettingOption.TRAVEL_SETTING_INCALL:
         this.setState(
-          (prevState) => ({
+          (prevState: State) => ({
             inCall: !prevState.inCall,
           }),
           () => {
@@ -335,7 +338,7 @@ class PostServiceScreen extends AgentScreen {
 
       case TravelSettingOption.TRAVEL_SETTING_REMOTE:
         this.setState(
-          (prevState) => ({
+          (prevState: State) => ({
             remoteCall: !prevState.remoteCall,
           }),
           () => {
@@ -419,10 +422,11 @@ class PostServiceScreen extends AgentScreen {
         proudcts: [],
       };
       const response = await this.serviceManager.postService(newService);
+
       this.setState({
         isLoading: false,
       });
-      const {serviceId} = response;
+      const {serviceId} = response as any;
 
       if (!serviceId) {
         throw new Error('serviceId not valid');
@@ -554,7 +558,7 @@ class PostServiceScreen extends AgentScreen {
           vertical
           sliderHeight={screenHeight}
           itemHeight={screenHeight}
-          ref={(ref) => {
+          ref={(ref: any) => {
             this.stepCardListRef = ref;
           }}
           enableSnap
@@ -581,8 +585,6 @@ class PostServiceScreen extends AgentScreen {
               />
             </KeyboardAvoidingView>
           )}
-          keyExtractor={(item, index) => index.toString()}
-          extraData={this.state}
         />
       </Container>
     );
@@ -602,4 +604,3 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 });
-export default PostServiceScreen;

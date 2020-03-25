@@ -8,9 +8,9 @@ import {Card, GradientHeader, Loading, Text, TextInput} from 'components';
 import Container from 'components/Container';
 import Button from 'components/Button';
 import {Colors} from 'values';
-import {Agent} from 'types/AgentType';
-import {Service} from 'types/ServiceType';
-import {Offering} from 'types/OfferingType';
+import {Agent} from 'types/Agent';
+import {Service} from 'types/Service';
+import {Offering} from 'types/Offering';
 import {InputValidity} from 'types/InputValidity';
 import {AlertUtils, ValidationUtils, FormatUtils} from 'utils';
 import AgentScreen from '../AgentScreen';
@@ -49,7 +49,7 @@ type State = {
 class PostOfferingScreen extends AgentScreen {
   offeringManager: OfferingManager;
   state: State;
-  offeringScrollView: KeyboardAwareScrollView;
+  offeringScrollView: KeyboardAwareScrollView | any;
 
   constructor(props: Props) {
     super(props);
@@ -78,12 +78,12 @@ class PostOfferingScreen extends AgentScreen {
     super.componentWillUnmount();
   }
 
-  onTitleChanged = (newTitle) => {
+  onTitleChanged = (newTitle: string) => {
     this.setState({
       currentTitle: newTitle,
     });
   };
-  onDescriptionChanged = (newDescription) => {
+  onDescriptionChanged = (newDescription: string) => {
     this.setState({
       currentDescription: newDescription,
     });
@@ -259,12 +259,12 @@ class PostOfferingScreen extends AgentScreen {
     });
   };
   toggleTimeModal = () => {
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       isTimeModalVisible: !prevState.isTimeModalVisible,
     }));
   };
   toggleOfferingModal = () => {
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       isOfferingListModalVisible: !prevState.isOfferingListModalVisible,
     }));
   };
@@ -333,7 +333,7 @@ class PostOfferingScreen extends AgentScreen {
             />
             <KeyboardAwareScrollView
               ref={(ref) => {
-                this.offeringScrollView = ref;
+                this.offeringScrollView = ref!;
               }}>
               <View style={styles.stepContainer}>
                 <Loading isLoading={isLoading} />
@@ -347,7 +347,6 @@ class PostOfferingScreen extends AgentScreen {
                   placeholder="Title..."
                   placeholderTextColor={Colors.bland}
                   autoFocus
-                  blueOnSubmit={false}
                 />
               </View>
               <TimeInputPrompt
@@ -372,7 +371,6 @@ class PostOfferingScreen extends AgentScreen {
                   placeholder="Description..."
                   placeholderTextColor={Colors.bland}
                   multiline
-                  autoGrow
                 />
               </View>
               <View style={styles.confirmationButtonContainer}>

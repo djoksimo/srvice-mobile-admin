@@ -3,10 +3,10 @@ import {StyleSheet, View} from 'react-native';
 import {GradientHeader, ProfilePictureThumbnail, Text} from 'components';
 import {Colors} from 'values';
 import StatBox from './StatBox';
-import {StatsType} from '../AccountScreenTypes';
+import {StatsType} from '../types';
 type Props = {
   profilePictureUrl: string;
-  stats: StatsType;
+  stats: StatsType[];
   firstName: string;
   lastName: string;
   onProfilePicturePressed: Function;

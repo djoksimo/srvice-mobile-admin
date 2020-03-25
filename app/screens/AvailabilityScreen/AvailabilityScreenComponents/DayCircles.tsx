@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TextStyle} from 'react-native';
 import {Colors} from 'values';
 import {Text, Touchable} from 'components';
 import {DayCircleType} from '../AvailabilityScreenTypes';
@@ -11,12 +11,12 @@ type Props = {
 const DayCircles = (props: Props) => {
   const {days, onPressCircle} = props;
 
-  const DayCircle = ({day}) => {
+  const DayCircle = ({day}: any) => {
     const {name, isSelected} = day;
     const letter = name[0];
-    const circleStyle = {
+    const circleStyle: TextStyle = {
       backgroundColor: isSelected ? Colors.primary : Colors.white,
-      borderColor: isSelected ? null : Colors.primary,
+      borderColor: isSelected ? undefined : Colors.primary,
       borderWidth: isSelected ? 0 : 2,
     };
     const textColor = isSelected ? Colors.white : Colors.primaryDark;

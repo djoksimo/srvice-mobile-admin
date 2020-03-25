@@ -7,13 +7,13 @@ import {FormatUtils} from 'utils';
 type Props = {
   title: string;
   list: Array<any>;
-  inputChangeHandler: Function;
-  removeListInput: Function;
-  addInput: Function;
+  inputChangeHandler: (input: string, index: number) => void;
+  removeListInput: (index: number) => void;
+  addInput: () => void;
 };
 
 class ListInput extends Component<Props> {
-  renderInputField = ({item: value, index}) => {
+  renderInputField = ({item: value, index}: any) => {
     const {inputChangeHandler, title, removeListInput} = this.props;
     return (
       <View style={styles.inputRowContainer}>
@@ -36,7 +36,7 @@ class ListInput extends Component<Props> {
   };
 
   render() {
-    const {list, addInput, title} = this.props;
+    const {list, addInput} = this.props;
     return (
       <View>
         <FlatList
@@ -45,7 +45,7 @@ class ListInput extends Component<Props> {
           keyExtractor={(item, index) => index.toString()}
         />
         <View style={styles.addBtnContainer}>
-          <Touchable onPress={() => addInput(title)}>
+          <Touchable onPress={() => addInput()}>
             <Text scale={Text.Scale.SUBTITLE} color={Colors.primary}>
               + Add More
             </Text>

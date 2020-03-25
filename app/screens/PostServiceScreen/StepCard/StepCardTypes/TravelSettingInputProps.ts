@@ -1,9 +1,10 @@
+import {TravelSetting} from './TravelSetting';
+
 export type TravelSettingInputProps = {
   inCall: boolean;
   outCall: boolean;
   remoteCall: boolean;
   radius: number;
-  onLocationInputSelected: Function;
-  onTravelSettingSelected: Function;
+  onTravelSettingSelected: (travelSetting: TravelSetting) => void;
   onRadiusChanged: Function;
 };

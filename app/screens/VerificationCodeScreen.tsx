@@ -118,7 +118,7 @@ class VerificationCodeScreen extends Component<Props, State> {
     }
   };
   toggleShuffle = () => {
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       shuffle: !prevState.shuffle,
     }));
   };

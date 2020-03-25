@@ -4,7 +4,8 @@ import {NavigationScreenProp} from 'react-navigation';
 import {Card} from 'components';
 import Badge from 'components/Badge';
 import styles from './styles';
-import {ActionButtons, ServiceInfo, UserInfo} from './RequestCardComponents'; // TODO add actual user Rating stuff once srvice-api implements user ratings fully
+import {ActionButtons, ServiceInfo, UserInfo} from './RequestCardComponents';
+// TODO add actual user Rating stuff once srvice-api implements user ratings fully
 
 type Props = {
   userFirstName: string;
@@ -30,7 +31,8 @@ const onPressResponseAction = (requestResponseParams: Partial<Props>) => {
     serviceTitle,
     navigation,
   } = requestResponseParams;
-  navigation.navigate({
+
+  navigation!.navigate({
     routeName: 'RequestResponseScreen',
     params: {
       requestId,

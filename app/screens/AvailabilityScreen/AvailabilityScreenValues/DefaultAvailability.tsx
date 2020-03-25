@@ -1,4 +1,4 @@
-import {Day} from '../../../enums';
+import {Day} from 'enums';
 const DefaultAvailability = [
   {
     isSelected: false,

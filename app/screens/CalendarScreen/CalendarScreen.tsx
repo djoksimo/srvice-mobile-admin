@@ -7,17 +7,19 @@ import {
   AgendaList,
   CalendarProvider,
 } from 'react-native-calendars';
-import {Agent} from 'types/AgentType';
+
+import {Agent} from 'types/Agent';
 import {Text, Touchable, Loading} from 'components';
 import Container from 'components/Container';
 import WarningBannerPrompt from 'components/WarningBannerPrompt';
 import {Colors, Fonts} from 'values';
 import {DateUtils, AlertUtils} from 'utils';
 import AgentScreen from '../AgentScreen';
-import {AgendaItem} from './CalendarScreenTypes';
+import {AgendaItem} from './types';
 import styles from './styles';
 import Bottle from '../../bottle';
 import {AgentManager, ScheduleManager} from '../../managers';
+import {Schedule} from 'types/Schedule';
 type State = {
   agent: Agent | any;
   agendaItems: Array<AgendaItem>;
@@ -43,7 +45,7 @@ class CalendarScreen extends AgentScreen {
     this.scheduleManager = Bottle.ScheduleManager;
   }
 
-  async componentDidMount(): Promise<any> & any {
+  async componentDidMount(): Promise<any> {
     super.componentDidMount();
 
     if (!this.state.agent) {
@@ -89,9 +91,9 @@ class CalendarScreen extends AgentScreen {
       return;
     }
 
-    const {bookings} = schedule; // I am aware that this code is messy as fuck but it works ;)
+    const {bookings} = schedule as Schedule; // I am aware that this code is messy as fuck but it works ;)
 
-    const bookingsByDate = {}; // get n days from today where n gets passed into DateUtils.getDates()
+    const bookingsByDate: any = {}; // get n days from today where n gets passed into DateUtils.getDates()
 
     DateUtils.getDates(7).forEach((dateStr) => {
       bookingsByDate[dateStr] = [];
@@ -107,18 +109,18 @@ class CalendarScreen extends AgentScreen {
         bookingsByDate[dateString].push(booking);
       }
     });
-    const agendaItems = [];
+    const agendaItems: any[] = [];
     const bookingDates = Object.keys(bookingsByDate); // format bookings into agenda items
 
     bookingDates.forEach((bookingDate) => {
-      const agendaItem = {
+      const agendaItem: any = {
         title: bookingDate,
       };
 
       if (_.isEmpty(bookingsByDate[bookingDate])) {
         agendaItem.data = [{}];
       } else {
-        agendaItem.data = bookingsByDate[bookingDate].map((booking) => ({
+        agendaItem.data = bookingsByDate[bookingDate].map((booking: any) => ({
           hour: DateUtils.formatHourAMPM(new Date(booking.start)),
           duration: DateUtils.getDifferenceInWords(
             new Date(booking.end),
@@ -136,19 +138,19 @@ class CalendarScreen extends AgentScreen {
   };
   getMarkedDates = () => {
     const {agendaItems} = this.state;
-    const marked = {};
+    const marked: any = {};
     if (_.isEmpty(agendaItems)) return marked;
     agendaItems.forEach((item) => {
       // only mark dates with data
       if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
-        marked[item.title] = {
+        marked[item.title as string] = {
           marked: true,
         };
       }
     });
     return marked;
   };
-  itemPressed = (id) => {
+  itemPressed = (id: string) => {
     Alert.alert(id); // TODO, open modal or separate screen to view appointment details
   };
   renderEmptyItem = () => (
@@ -196,7 +198,7 @@ class CalendarScreen extends AgentScreen {
     selectedDotColor: Colors.white,
     disabledDotColor: Colors.bland,
   });
-  renderAgendaItem = ({item}) => {
+  renderAgendaItem = ({item}: any) => {
     if (_.isEmpty(item)) {
       return this.renderEmptyItem();
     }

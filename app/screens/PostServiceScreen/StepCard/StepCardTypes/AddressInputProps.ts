@@ -1,4 +1,4 @@
 export type AddressInputProps = {
   address: string;
-  onLocationInputSelected: Function;
+  onLocationInputSelected: () => void;
 };

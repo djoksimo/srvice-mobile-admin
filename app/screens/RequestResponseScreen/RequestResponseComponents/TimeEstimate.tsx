@@ -7,12 +7,12 @@ type Props = {
   currentHours: number;
   currentMinutes: number;
   currentDays: number;
-  renderHourPickerItems: Function;
-  renderMinutePickerItems: Function;
-  onHoursChanged: Function;
-  onMinutesChanged: Function;
-  onDaysChanged: Function;
-  toggleTimeModal: Function;
+  renderHourPickerItems: () => any;
+  renderMinutePickerItems: () => any;
+  onHoursChanged: (hours: string) => void;
+  onMinutesChanged: (minutes: string) => void;
+  onDaysChanged: (days: string) => void;
+  toggleTimeModal: () => void;
 };
 
 const TimeEstimate = ({

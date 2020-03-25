@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import {View, StyleSheet} from 'react-native';
-import Modal from 'react-native-modal';
+import Modal, {ModalProps} from 'react-native-modal';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Colors} from 'values';
 import {MenuButton} from 'types/MenuButton';
 import {Text, Touchable, Card} from 'components';
-type Props = {
+
+interface Props extends Partial<ModalProps> {
   isOpen: boolean;
   menuButtons: Array<MenuButton>;
-};
+}
 
 class ModalMenu extends Component<Props> {
   render() {

@@ -3293,7 +3293,7 @@ hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
-hoist-non-react-statics@^3.0.1, hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1:
+hoist-non-react-statics@^3.0.1, hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -5533,12 +5533,11 @@ react-native-animatable@1.3.3:
   dependencies:
     prop-types "^15.7.2"
 
-react-native-calendars@^1.264.0:
-  version "1.264.0"
-  resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.264.0.tgz#552cfff1480ab6c860f54e12ec2b82f9b514aae6"
-  integrity sha512-NHNekv1iwHMI+evr8dDLFqCdvnCWGlBxPKO0/bw1+HDy4uukuab//akoOx9/GGl/3+XV6MVTLdda+qjT6pD2Bg==
+react-native-calendars@1.204.0:
+  version "1.204.0"
+  resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.204.0.tgz#685725b060e9a2d8a5b8ea1755026503d001487e"
+  integrity sha512-OTcO7CPjmEUJ9IHJIS5C2jE+iwKeeXneSVgvtqhSzMx8/PgbzQvJMXSLZ16CFh2kU6tKbHAhocHHU7Ld89N+fg==
   dependencies:
-    hoist-non-react-statics "^3.3.1"
     lodash "^4.0.0"
     prop-types "^15.5.10"
     xdate "^0.8.0"
@@ -5668,10 +5667,10 @@ react-native-safe-area-view@^0.14.1:
   dependencies:
     debounce "^1.2.0"
 
-react-native-snackbar@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-snackbar/-/react-native-snackbar-2.2.0.tgz#8b4daf9e16523d61f0152d816ba39982fcbf1198"
-  integrity sha512-j2qVtuXuk3FGNxUjnBqHiQLnz2lYVwCyrsvxpCCxif7ddMqY0sfbACXUwRLTEB5d3aliSN/6EZInGCJ93e4cMQ==
+react-native-snackbar@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-snackbar/-/react-native-snackbar-1.0.2.tgz#d7d6f103dd1b54745ac274314a3b5afee2668b6e"
+  integrity sha512-VOpF7/fUdv32zVH+CW542wpFYGtvAw+nFVloJu0HJWGeClB6V/GcxgAADQOEReOw91RnQkr+bZk0aEf4UXZ64w==
 
 react-native-snap-carousel@^3.8.0:
   version "3.8.4"

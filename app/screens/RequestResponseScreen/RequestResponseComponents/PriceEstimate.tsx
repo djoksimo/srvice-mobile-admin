@@ -4,7 +4,7 @@ import {Text, TextInput} from 'components';
 import {Colors} from 'values';
 type Props = {
   currentPrice: number;
-  onPriceChanged: Function;
+  onPriceChanged: (price: string) => void;
 };
 
 const PriceEstimate = ({currentPrice, onPriceChanged}: Props) => (

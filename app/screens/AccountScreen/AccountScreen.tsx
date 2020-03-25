@@ -15,14 +15,14 @@ import _ from 'lodash'; // $FlowFixMe
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Card, Carousel, Text, Loading, Touchable, TextInput} from 'components';
 import Modal from 'react-native-modal';
-import {Agent} from 'types/AgentType';
+import {Agent} from 'types/Agent';
 import Container from 'components/Container';
 import ModalMenu from 'components/ModalMenu';
 import InputLocationModal from 'components/InputLocationModal';
 import {Colors, Null, Dimensions} from 'values';
 import {FormatUtils, AlertUtils} from 'utils';
 import Button from 'components/Button';
-import {Service} from 'types/ServiceType';
+import {Service} from 'types/Service';
 import {MenuButton} from 'types/MenuButton';
 import AgentScreen from '../AgentScreen';
 import {
@@ -32,17 +32,14 @@ import {
   PublicInfoSection,
   ServiceCard,
 } from './AccountScreenComponents';
-import {
-  ModalType,
-  PublicInfoSectionType,
-  StatsType,
-} from './AccountScreenTypes';
+import {ModalType, PublicInfoSectionType, StatsType} from './types';
 import SkillsSection from './AccountScreenComponents/SkillsSection';
 import {ProfileListSetting} from '../../enums';
 import {AuthenticationManager, ContentManager} from '../../managers';
 import Bottle from '../../bottle';
 import {ArrayLikeInput} from './AccountScreenValues';
 import styles from './styles';
+import {Location} from 'types/Location';
 type State = {
   agent: Agent | any;
   originalAgent: Agent | any;
@@ -78,17 +75,16 @@ class AccountScreen extends AgentScreen {
       isLoading: false,
       publicPictureUrls: [],
       isModalMenuOpen: false,
-      shouldHandleNavigationAction: false,
       isInputLocationModalVisible: false,
     };
     this.contentManager = Bottle.ContentManager;
     this.authenticationManager = Bottle.AuthenticationManager;
   }
 
-  async componentDidMount(): Promise<any> & any {
+  async componentDidMount() {
     super.componentDidMount();
     await this.refreshAgent();
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       isLoading: false,
       originalAgent: prevState.agent,
     }));
@@ -140,7 +136,7 @@ class AccountScreen extends AgentScreen {
     }
 
     if (shouldSetBusinessName) {
-      this.onEditPressed(ProfileListSetting.COMPANY);
+      this.onEditPressed(ProfileListSetting.Company);
     }
 
     if (updateAgent) {
@@ -149,7 +145,7 @@ class AccountScreen extends AgentScreen {
   };
   toggleInputLocationModalVisibility = (onToggleModalDone = () => {}) => {
     this.setState(
-      (prevState) => ({
+      (prevState: State) => ({
         isInputLocationModalVisible: !prevState.isInputLocationModalVisible,
       }),
       () => {
@@ -158,7 +154,7 @@ class AccountScreen extends AgentScreen {
     );
   };
   onEditPressed = (modalId: ModalType) => {
-    if (modalId === ProfileListSetting.LOCATION) {
+    if (modalId === ProfileListSetting.Location) {
       this.toggleInputLocationModalVisibility();
     }
 
@@ -168,7 +164,7 @@ class AccountScreen extends AgentScreen {
   };
   toggleModalMenuVisibility = (onToggleModalMenuVisibility = () => {}) => {
     this.setState(
-      (prevState) => ({
+      (prevState: State) => ({
         isModalMenuOpen: !prevState.isModalMenuOpen,
       }),
       () => {
@@ -202,15 +198,15 @@ class AccountScreen extends AgentScreen {
       },
     );
   };
-  onCompanyNameChanged = (company) => {
-    this.setState((prevState) => ({
+  onCompanyNameChanged = (company: string) => {
+    this.setState((prevState: State) => ({
       agent: {...prevState.agent, company},
     }));
   };
   updateAgentLocation = ({address}: Location) => {
     try {
       this.setState(
-        (prevState) => ({
+        (prevState: State) => ({
           agent: {...prevState.agent, location: address},
         }),
         () => {
@@ -228,7 +224,7 @@ class AccountScreen extends AgentScreen {
       AlertUtils.showSnackBar('Something went wrong');
     }
   };
-  onListItemChanged = (input, index) => {
+  onListItemChanged = (input: string, index: number) => {
     const {agent, editModalId} = this.state;
     const {certifications, education, languages, skills} = agent;
     const newCertifications = [...certifications];
@@ -237,19 +233,19 @@ class AccountScreen extends AgentScreen {
     const newSkills = [...skills];
 
     switch (editModalId) {
-      case ProfileListSetting.CERTIFICATION:
+      case ProfileListSetting.Certification:
         newCertifications[index] = input;
         break;
 
-      case ProfileListSetting.EDUCATION:
+      case ProfileListSetting.Education:
         newEducation[index] = input;
         break;
 
-      case ProfileListSetting.LANGUAGE:
+      case ProfileListSetting.Language:
         newLanguages[index] = input;
         break;
 
-      case ProfileListSetting.SKILL:
+      case ProfileListSetting.Skill:
         newSkills[index] = input;
         break;
 
@@ -265,12 +261,12 @@ class AccountScreen extends AgentScreen {
     );
   };
   updateAgentListStates = (
-    newCertifications,
-    newEducation,
-    newLanguages,
-    newSkills,
+    newCertifications: string[],
+    newEducation: string[],
+    newLanguages: string[],
+    newSkills: string[],
   ) => {
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       agent: {
         ...prevState.agent,
         certifications: newCertifications,
@@ -289,19 +285,19 @@ class AccountScreen extends AgentScreen {
     const newSkills = [...skills];
 
     switch (editModalId) {
-      case ProfileListSetting.CERTIFICATION:
+      case ProfileListSetting.Certification:
         newCertifications.push('');
         break;
 
-      case ProfileListSetting.EDUCATION:
+      case ProfileListSetting.Education:
         newEducation.push('');
         break;
 
-      case ProfileListSetting.LANGUAGE:
+      case ProfileListSetting.Language:
         newLanguages.push('');
         break;
 
-      case ProfileListSetting.SKILL:
+      case ProfileListSetting.Skill:
         newSkills.push('');
         break;
 
@@ -325,19 +321,19 @@ class AccountScreen extends AgentScreen {
     const newSkills = [...skills];
 
     switch (editModalId) {
-      case ProfileListSetting.CERTIFICATION:
+      case ProfileListSetting.Certification:
         newCertifications.splice(index, 1);
         break;
 
-      case ProfileListSetting.EDUCATION:
+      case ProfileListSetting.Education:
         newEducation.splice(index, 1);
         break;
 
-      case ProfileListSetting.LANGUAGE:
+      case ProfileListSetting.Language:
         newLanguages.splice(index, 1);
         break;
 
-      case ProfileListSetting.SKILL:
+      case ProfileListSetting.Skill:
         newSkills.splice(index, 1);
         break;
 
@@ -361,7 +357,7 @@ class AccountScreen extends AgentScreen {
       skills,
       company,
     } = originalAgent;
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       agent: {...prevState.agent, company},
     }));
     const newCertifications = [...certifications];
@@ -387,23 +383,23 @@ class AccountScreen extends AgentScreen {
       const {company, certifications, education, languages, skills} = agent;
 
       switch (editModalId) {
-        case ProfileListSetting.CERTIFICATION:
+        case ProfileListSetting.Certification:
           await this.agentManager.updateAgent('certifications', certifications);
           break;
 
-        case ProfileListSetting.EDUCATION:
+        case ProfileListSetting.Education:
           await this.agentManager.updateAgent('education', education);
           break;
 
-        case ProfileListSetting.LANGUAGE:
+        case ProfileListSetting.Language:
           await this.agentManager.updateAgent('languages', languages);
           break;
 
-        case ProfileListSetting.SKILL:
+        case ProfileListSetting.Skill:
           await this.agentManager.updateAgent('skills', skills);
           break;
 
-        case ProfileListSetting.COMPANY:
+        case ProfileListSetting.Company:
           await this.agentManager.updateAgent('company', company);
           break;
 
@@ -421,7 +417,7 @@ class AccountScreen extends AgentScreen {
       AlertUtils.showSnackBar('Something went wrong :(');
     }
   };
-  renderPublicInfoSection = ({item: section, index}) => (
+  renderPublicInfoSection = ({item: section, index}: any) => (
     <PublicInfoSection
       inputChangeHandler={() => this.onEditPressed(section.modalId)}
       title={section.title}
@@ -472,7 +468,7 @@ class AccountScreen extends AgentScreen {
     });
     await this.saveProfilePicture(picture);
   };
-  saveProfilePicture = async (picture) => {
+  saveProfilePicture = async (picture: any) => {
     this.setState({
       isLoading: true,
     });
@@ -486,7 +482,7 @@ class AccountScreen extends AgentScreen {
         'profilePictureUrl',
         newProfilePictureUrl,
       );
-      this.setState((prevState) => ({
+      this.setState((prevState: State) => ({
         agent: {...prevState.agent, profilePictureUrl: newProfilePictureUrl},
       }));
     } catch (error) {
@@ -498,7 +494,7 @@ class AccountScreen extends AgentScreen {
       isLoading: false,
     });
   };
-  renderServiceCard = ({item: service}: Service) => {
+  renderServiceCard = ({item: service}: {item: Service}) => {
     const {navigation} = this.props;
     return <ServiceCard service={service} navigation={navigation} />;
   };
@@ -543,7 +539,7 @@ class AccountScreen extends AgentScreen {
         firstName,
         lastName,
       } = agent;
-      const stats: StatsType = [
+      const stats: StatsType[] = [
         {
           title: 'Services',
           count: services && services.length,
@@ -556,34 +552,34 @@ class AccountScreen extends AgentScreen {
           count: services && bookings.length,
         },
       ];
-      const publicInfoSections: PublicInfoSectionType = [
+      const publicInfoSections: PublicInfoSectionType[] = [
         {
           title: 'Business Name',
-          modalId: ProfileListSetting.COMPANY,
+          modalId: ProfileListSetting.Company,
           description: _.isEmpty(company) ? Null.profileSection : company,
         },
         {
           title: 'Business Location',
-          modalId: ProfileListSetting.LOCATION,
+          modalId: ProfileListSetting.Location,
           description: _.isEmpty(location) ? Null.profileSection : location,
         },
         {
           title: 'Education',
-          modalId: ProfileListSetting.EDUCATION,
+          modalId: ProfileListSetting.Education,
           description: _.isEmpty(education)
             ? Null.profileSection
             : FormatUtils.newLineSeparateArray(education),
         },
         {
           title: 'Languages',
-          modalId: ProfileListSetting.LANGUAGE,
+          modalId: ProfileListSetting.Language,
           description: _.isEmpty(languages)
             ? Null.profileSection
             : FormatUtils.commaSeparateArray(languages),
         },
         {
           title: 'Certifications',
-          modalId: ProfileListSetting.CERTIFICATION,
+          modalId: ProfileListSetting.Certification,
           description: _.isEmpty(certifications)
             ? Null.profileSection
             : FormatUtils.newLineSeparateArray(certifications),
@@ -591,19 +587,19 @@ class AccountScreen extends AgentScreen {
       ];
 
       switch (editModalId) {
-        case ProfileListSetting.LANGUAGE:
+        case ProfileListSetting.Language:
           listInputData = languages;
           break;
 
-        case ProfileListSetting.CERTIFICATION:
+        case ProfileListSetting.Certification:
           listInputData = certifications;
           break;
 
-        case ProfileListSetting.EDUCATION:
+        case ProfileListSetting.Education:
           listInputData = education;
           break;
 
-        case ProfileListSetting.SKILL:
+        case ProfileListSetting.Skill:
           listInputData = skills;
           break;
 
@@ -612,9 +608,9 @@ class AccountScreen extends AgentScreen {
           break;
       }
 
-      const inputModal = ArrayLikeInput[editModalId] ? (
+      const inputModal = ArrayLikeInput[editModalId!] ? (
         <ListInput
-          title={FormatUtils.pluralToSingular(editModalId)}
+          title={FormatUtils.pluralToSingular(editModalId!)}
           list={listInputData}
           inputChangeHandler={this.onListItemChanged}
           addInput={this.addListInput}
@@ -705,7 +701,7 @@ class AccountScreen extends AgentScreen {
           </View>
           <SkillsSection
             onEditPressed={() => {
-              this.onEditPressed(ProfileListSetting.SKILL);
+              this.onEditPressed(ProfileListSetting.Skill);
             }}
             skills={skills}
           />
@@ -715,7 +711,7 @@ class AccountScreen extends AgentScreen {
             backdropColor={Colors.screenBackground}
             isVisible={
               editModalId !== null &&
-              editModalId !== ProfileListSetting.LOCATION
+              editModalId !== ProfileListSetting.Location
             }
             onSwipeComplete={this.dismissChanges}
             onBackdropPress={this.dismissChanges}>

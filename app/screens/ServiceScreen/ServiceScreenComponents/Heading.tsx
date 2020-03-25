@@ -5,7 +5,7 @@ import {Text, Touchable} from 'components';
 import {Colors} from 'values';
 type Props = {
   text: string;
-  onAddPressed?: () => {};
+  onAddPressed?: () => void;
 };
 
 class Heading extends Component<Props> {

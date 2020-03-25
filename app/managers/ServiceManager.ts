@@ -11,7 +11,7 @@ class ServiceManager {
     this.cacheService = cacheService;
   }
 
-  async postService(service: Service): Promise<Service | Error> {
+  async postService(service: Service & any): Promise<Service | Error> {
     try {
       const response = await this.serviceService.postService(
         service,

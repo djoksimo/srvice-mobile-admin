@@ -2,9 +2,11 @@ import React from 'react';
 import {Image, View} from 'react-native';
 import {Touchable} from 'components';
 import styles from '../styles';
-import plusIcon from '../../../../assets/plusIcon.png';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const PlusIcon = require('../../../../../assets/plusIcon.png');
+
 type Props = {
-  onPressRespondButtonPressed: Function;
+  onPressRespondButtonPressed: () => void;
 };
 
 const ActionButtons = ({onPressRespondButtonPressed}: Props) => (
@@ -14,7 +16,7 @@ const ActionButtons = ({onPressRespondButtonPressed}: Props) => (
         <View style={styles.actionButton}>
           <Image
             style={styles.actionIcon}
-            source={plusIcon}
+            source={PlusIcon}
             resizeMode="contain"
           />
         </View>

@@ -5,7 +5,7 @@ import {Colors} from 'values';
 type Props = {
   title: string;
   info: string;
-  inputChangeHandler: Function;
+  inputChangeHandler: () => void;
   index: number;
   lastSectionIndex: number;
 };

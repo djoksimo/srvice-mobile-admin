@@ -1,6 +1,7 @@
 // @flow
 import {Service} from './Service';
 import {ServiceRating} from './ServiceRating';
+import {Schedule} from './Schedule';
 
 export interface Agent {
   _id?: string;
@@ -21,5 +22,5 @@ export interface Agent {
   skills: Array<string>;
   selfieUrl: string;
   givenRatings: ServiceRating[];
-  schedule: string;
+  schedule: string | Schedule;
 }

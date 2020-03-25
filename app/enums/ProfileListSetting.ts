@@ -1,10 +1,10 @@
-class ProfileListSetting {
-  static EDUCATION = 'education';
-  static LANGUAGE = 'languages';
-  static CERTIFICATION = 'certifications';
-  static SKILL = 'skills';
-  static COMPANY = 'company';
-  static LOCATION = 'location';
+enum ProfileListSetting {
+  Education = 'education',
+  Language = 'languages',
+  Certification = 'certifications',
+  Skill = 'skills',
+  Company = 'company',
+  Location = 'location',
 }
 
 export default ProfileListSetting;

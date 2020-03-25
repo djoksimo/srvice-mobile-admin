@@ -12,7 +12,8 @@ import OrDivider from 'components/OrDivider';
 import {Colors, Dimensions} from 'values';
 import {Category} from 'types/Category';
 import Bottle from '../bottle';
-import {SrviceLogoBlue} from '../assets';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const SrviceLogoBlue = require('../../assets/srvice_blue_400px.png');
 import {AuthStatus} from '../enums';
 import {AlertUtils} from '../utils';
 

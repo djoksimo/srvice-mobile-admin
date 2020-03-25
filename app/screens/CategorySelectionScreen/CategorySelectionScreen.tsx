@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import {NavigationScreenProp} from 'react-navigation';
-import {Category} from 'types/CategoryType';
+import {Category} from 'types/Category';
 import {Text, Loading} from 'components';
 import Container from 'components/Container';
 import {Colors} from 'values';
@@ -9,7 +9,7 @@ import Bottle from '../../bottle';
 import {ContentManager} from '../../managers';
 import {CategorySquare} from './CategorySelectionComponents';
 type Props = {
-  navigation: NavigationScreenProp;
+  navigation: NavigationScreenProp<any, any>;
 };
 type State = {
   categories: Array<Category>;
@@ -17,7 +17,7 @@ type State = {
   error: Error | null;
 };
 
-class CategorySelectionScreen extends Component<Props, State> {
+export class CategorySelectionScreen extends Component<Props, State> {
   contentManager: ContentManager;
   allCategoriesSubscription: any;
 
@@ -61,7 +61,7 @@ class CategorySelectionScreen extends Component<Props, State> {
     this.allCategoriesSubscription.unsubscribe();
   }
 
-  onCategorySelected = (category) => {
+  onCategorySelected = (category: Category) => {
     const {navigation} = this.props;
     navigation.navigate({
       routeName: 'PostServiceScreen',
@@ -73,7 +73,7 @@ class CategorySelectionScreen extends Component<Props, State> {
 
   render() {
     const {categories, isLoading, error} = this.state;
-    let categoryList = <View />;
+    let categoryList: any = <View />;
 
     if (categories) {
       categoryList = categories.map((category, index) => (
@@ -136,4 +136,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-export default CategorySelectionScreen;

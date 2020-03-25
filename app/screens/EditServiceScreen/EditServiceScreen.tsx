@@ -2,12 +2,12 @@ import React from 'react';
 import {View, SectionList} from 'react-native';
 import {NavigationScreenProp} from 'react-navigation';
 import _ from 'lodash';
-import {Agent} from 'types/AgentType';
+import {Agent} from 'types/Agent';
 import {GradientHeader, Loading, Text, Card} from 'components';
 import Container from 'components/Container';
 import {EditModal} from 'components/EditModal';
 import {Colors} from 'values';
-import {Service} from 'types/ServiceType';
+import {Service} from 'types/Service';
 import {ValidationUtils, AlertUtils} from 'utils';
 import AgentScreen from '../AgentScreen';
 import {ServiceManager} from '../../managers';
@@ -46,7 +46,7 @@ class EditServiceScreen extends AgentScreen {
     this.serviceManager = Bottle.ServiceManager;
   }
 
-  async componentDidMount(): any {
+  async componentDidMount() {
     super.componentDidMount();
     this.setService();
   }
@@ -66,14 +66,14 @@ class EditServiceScreen extends AgentScreen {
 
   getSectionListData = () => {
     const {service} = this.state;
-    let sections = [];
+    let sections: any = [];
 
     if (service) {
       sections = editServiceSections.map(({field, title, fields}) => {
         let data = [
           {
             fieldId: field,
-            text: `${service[field]}`,
+            text: `${service[field!]}`,
           },
         ];
 
@@ -103,7 +103,7 @@ class EditServiceScreen extends AgentScreen {
     return sections;
   };
   toggleEditModal = (editFieldId: string) => {
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       isModalVisible: !prevState.isModalVisible,
       currentEditValue: prevState.service[editFieldId],
       currentEditFieldId: editFieldId,
@@ -111,18 +111,18 @@ class EditServiceScreen extends AgentScreen {
     }));
   };
   onEditText = (newEditValue: string) => {
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       currentEditValue: newEditValue,
       service: {
         ...prevState.service,
-        [prevState.currentEditFieldId]: newEditValue,
+        [prevState.currentEditFieldId!]: newEditValue,
       },
     }));
   };
   onChangeSwitchValue = (fieldId: string, newSwitchValue: boolean) => {
     try {
       this.setState(
-        (prevState) => ({
+        (prevState: State) => ({
           service: {...prevState.service, [fieldId]: newSwitchValue},
         }),
         async () => {
@@ -138,7 +138,7 @@ class EditServiceScreen extends AgentScreen {
             AlertUtils.showSnackBar('Updated service!', Colors.primaryLight);
             this.refreshAgent();
           } else {
-            this.setState((prevState) => ({
+            this.setState((prevState: State) => ({
               service: {...prevState.service, [fieldId]: !newSwitchValue},
             }));
             AlertUtils.showSnackBar(serviceValidity.reason);
@@ -151,13 +151,13 @@ class EditServiceScreen extends AgentScreen {
     }
   };
   onDismissPressed = () => {
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       isModalVisible: !prevState.isModalVisible,
       service: {...prevState.originalService},
     }));
   };
   onSavePressed = async () => {
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       isModalVisible: !prevState.isModalVisible,
       isLoading: true,
     }));
@@ -173,7 +173,7 @@ class EditServiceScreen extends AgentScreen {
 
       if (serviceValidity.isValid) {
         await this.serviceManager.updateService(
-          currentEditFieldId,
+          currentEditFieldId!,
           currentEditValue,
           _id,
         );
@@ -202,7 +202,7 @@ class EditServiceScreen extends AgentScreen {
     const {isLoading, isModalVisible, currentEditValue, service} = this.state;
     return (
       <Container style={styles.container}>
-        {isLoading && <Loading />}
+        {isLoading && <Loading isLoading />}
         <GradientHeader>
           <View style={styles.screenTitleContainer}>
             <Text scale={Text.Scale.H4} color={Colors.white}>
@@ -213,7 +213,7 @@ class EditServiceScreen extends AgentScreen {
             <SectionList
               contentContainerStyle={styles.sectionList}
               sections={this.getSectionListData()}
-              keyExtractor={(item, index) => item + index}
+              keyExtractor={(item: any, index) => item.text + index}
               renderItem={({item}) => {
                 const {fieldId, text} = item;
                 return (
@@ -237,7 +237,7 @@ class EditServiceScreen extends AgentScreen {
           </Card>
           <EditModal
             isModalVisible={isModalVisible}
-            inputValue={currentEditValue}
+            inputValue={currentEditValue as string}
             onChangeText={this.onEditText}
             placeholderText={this.getPlaceholder()}
             onDismissPressed={this.onDismissPressed}

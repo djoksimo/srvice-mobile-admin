@@ -8,7 +8,7 @@ import {
 import {Colors} from 'values';
 
 interface Props extends TextInputProps {
-  style?: TextStyle;
+  style?: TextStyle | TextStyle[];
   setRef?: () => void;
   onSubmitEditing?: (e?: any) => void;
   onChangeText: (text: string) => void;
@@ -21,7 +21,11 @@ function TextInput(
   const inputTextStyle: TextStyle[] = [styles.base];
 
   if (style) {
-    inputTextStyle.push(style);
+    if (Array.isArray(style)) {
+      inputTextStyle.push(style as TextStyle);
+    } else {
+      inputTextStyle.push(...(style as TextStyle[]));
+    }
   }
 
   return (

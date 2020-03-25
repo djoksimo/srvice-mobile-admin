@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {CategoryIcon, Text, Touchable} from 'components';
 import {Colors} from 'values';
-import {Category} from 'types/CategoryType';
+import {Category} from 'types/Category';
 type Props = {
   category: Category;
   onCategorySelected: Function;

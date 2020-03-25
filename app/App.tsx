@@ -8,8 +8,8 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RNRestart from 'react-native-restart';
 
-import {Colors} from 'values';
-import {AlertUtils} from 'utils';
+import {Colors} from './values';
+import {AlertUtils} from './utils';
 import {
   PostServiceScreen,
   RequestListScreen,

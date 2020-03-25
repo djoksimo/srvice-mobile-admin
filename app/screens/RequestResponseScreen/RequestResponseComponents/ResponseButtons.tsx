@@ -6,8 +6,8 @@ import {Colors} from 'values';
 type Props = {
   isDeclinePressed: boolean;
   isRespondPressed: boolean;
-  onRespondPressed: Function;
-  onDeclinePressed: Function;
+  onRespondPressed: () => void;
+  onDeclinePressed: () => void;
 };
 
 const ResponseButtons = ({

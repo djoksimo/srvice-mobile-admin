@@ -1,6 +1,6 @@
-import React, {Component} from 'react'; // eslint-disable-next-line react-native/split-platform-components
+import React, {Component} from 'react';
 
-import {View, Picker} from 'react-native'; // $FlowFixMe
+import {View, Picker} from 'react-native';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {NavigationScreenProp} from 'react-navigation';
@@ -23,7 +23,7 @@ import {
   ResponseButtons,
 } from './RequestResponseComponents';
 type State = {
-  currentPrice: string;
+  currentPrice: number;
   currentHours: number;
   currentMinutes: number;
   currentDays: number;
@@ -36,7 +36,7 @@ type Props = {
   navigation: NavigationScreenProp<any, any>;
 };
 
-class RequestResponseScreen extends Component<Props, State> {
+export class RequestResponseScreen extends Component<Props, State> {
   authenticationManager: any;
   bookingManager: any;
   contentManager: any;
@@ -45,7 +45,7 @@ class RequestResponseScreen extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      currentPrice: '',
+      currentPrice: 0,
       currentHours: 0,
       currentMinutes: 0,
       currentDays: 0,
@@ -59,19 +59,19 @@ class RequestResponseScreen extends Component<Props, State> {
     this.contentManager = Bottle.ContentManager;
   }
 
-  onPriceChanged = (currentPrice) => {
+  onPriceChanged = (currentPrice: string) => {
     this.setState({
-      currentPrice,
+      currentPrice: +FormatUtils.enforceNums(currentPrice),
     });
   };
-  onHoursChanged = (currentHours: number) => {
+  onHoursChanged = (currentHours: string) => {
     this.setState({
-      currentHours,
+      currentHours: +FormatUtils.enforceNums(currentHours),
     });
   };
-  onMinutesChanged = (currentMinutes: number) => {
+  onMinutesChanged = (currentMinutes: string) => {
     this.setState({
-      currentMinutes,
+      currentMinutes: +FormatUtils.enforceNums(currentMinutes),
     });
   };
   onDaysChanged = (currentDays: string) => {
@@ -115,14 +115,14 @@ class RequestResponseScreen extends Component<Props, State> {
   isValidInput = (): boolean => {
     const {currentPrice} = this.state;
 
-    if (currentPrice === '') {
+    if (currentPrice === 0) {
       AlertUtils.showSnackBar('Please enter a price estimate');
       return false;
     }
 
     return true;
   };
-  onRespondPressed = async (): void => {
+  onRespondPressed = async (): Promise<any> => {
     this.setState({
       isRespondPressed: true,
     });
@@ -137,7 +137,7 @@ class RequestResponseScreen extends Component<Props, State> {
       return;
     }
 
-    const priceEstimate = +FormatUtils.enforceNums(currentPrice);
+    const priceEstimate = Number(currentPrice);
     const timeEstimate = currentHours * 60 + currentMinutes;
     const bookingResponse: BookingResponse = {
       bookingId,
@@ -186,7 +186,7 @@ class RequestResponseScreen extends Component<Props, State> {
     return hours;
   };
   toggleTimeModal = () => {
-    this.setState((prevState) => ({
+    this.setState((prevState: State) => ({
       isTimeModalOpen: !prevState.isTimeModalOpen,
     }));
   };
@@ -302,5 +302,3 @@ class RequestResponseScreen extends Component<Props, State> {
     );
   }
 }
-
-export default RequestResponseScreen;
