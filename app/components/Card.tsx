@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import {Colors, Dimensions} from 'values';
 type Props = {
   children: React.ReactNode;
-  style: any;
+  style?: any;
 };
 
 const Card = ({children, style}: Props) => (

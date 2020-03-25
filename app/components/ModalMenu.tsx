@@ -27,7 +27,7 @@ class ModalMenu extends Component<Props> {
                   name={icon}
                   size={24}
                   color={Colors.primary}
-                  iconStyle={styles.actionIcon}
+                  style={styles.actionIcon}
                 />
               </View>
               <View>

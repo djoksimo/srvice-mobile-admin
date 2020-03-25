@@ -1,16 +1,22 @@
 import React from 'react';
-import {View, ScrollView, Alert} from 'react-native';
+import {
+  View,
+  ScrollView,
+  Alert,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+} from 'react-native';
 import {NavigationScreenProp} from 'react-navigation';
 import _ from 'lodash';
 import {Card, GradientHeader, Text, Carousel} from 'components';
 import Container from 'components/Container';
 import SectionHeading from 'components/SectionHeading';
 import ModalMenu from 'components/ModalMenu';
-import {Agent} from 'types/AgentType';
+import {Agent} from 'types/Agent';
 import Button from 'components/Button';
 import {Dimensions, Colors} from 'values';
 import {MenuButton} from 'types/MenuButton';
-import {Service} from 'types/ServiceType';
+import {Service} from 'types/Service';
 import {AlertUtils} from 'utils';
 import LocationModal from './ServiceScreenComponents/LocationModal';
 import {ServiceInfoCard, ServiceRating} from './ServiceScreenComponents';
@@ -18,6 +24,7 @@ import AgentScreen from '../AgentScreen';
 import styles from './styles';
 import Bottle from '../../bottle';
 import {ServiceManager} from '../../managers';
+
 type State = {
   agent: Agent | any;
   scrollPosition: number;
@@ -56,9 +63,10 @@ class ServiceScreen extends AgentScreen {
     super.componentWillUnmount();
   }
 
-  renderServiceRating = ({item: serviceRating}) => {
+  renderServiceRating = ({item: serviceRating}: any) => {
     const {comment, overallRating, user, date} = serviceRating;
     const {firstName, lastName, profilePictureUrl} = user;
+
     return (
       <ServiceRating
         firstName={firstName}
@@ -70,7 +78,7 @@ class ServiceScreen extends AgentScreen {
       />
     );
   };
-  onScroll = (e) => {
+  onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     this.setState({
       scrollPosition: e.nativeEvent.contentOffset.y,
     });
@@ -111,7 +119,7 @@ class ServiceScreen extends AgentScreen {
     });
   };
   toggleModalMenu = () => {
-    this.setState((previousState) => ({
+    this.setState((previousState: State) => ({
       isModalMenuOpen: !previousState.isModalMenuOpen,
     }));
   };
@@ -121,7 +129,7 @@ class ServiceScreen extends AgentScreen {
       const service = navigation.getParam('service');
       const {_id: serviceId} = service; // eslint-disable-next-line no-unused-vars
 
-      const res = await this.serviceManager.deleteService(serviceId);
+      await this.serviceManager.deleteService(serviceId);
       AlertUtils.showSnackBar(
         'Successfully removed service',
         Colors.primaryDark,
@@ -262,11 +270,7 @@ class ServiceScreen extends AgentScreen {
         backButtonHandler={this.onBackButtonPressed}
         menu
         onMenuButtonPressed={this.toggleModalMenu}>
-        <ModalMenu
-          menuButtons={modalMenuButtons}
-          isOpen={isModalMenuOpen}
-          onBackdropPress={this.toggleModalMenu}
-        />
+        <ModalMenu menuButtons={modalMenuButtons} isOpen={isModalMenuOpen} />
         <ScrollView onScroll={this.onScroll}>
           <GradientHeader>
             <View style={styles.serviceInfoContainer}>

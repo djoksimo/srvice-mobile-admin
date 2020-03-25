@@ -7,7 +7,7 @@ import {CategoryBackground, Loading} from 'components';
 import Container from 'components/Container';
 import {Colors, Dimensions} from 'values';
 import {FormatUtils, AlertUtils} from 'utils';
-import {Category} from 'types/CategoryType';
+import {Category} from 'types/Category';
 import {AuthenticationManager} from '../../../managers';
 import {CredentialsForm} from './SignupCredentialsScreenComponents';
 import Bottle from '../../../bottle';
@@ -57,7 +57,7 @@ class SignupCredentialsScreen extends Component<Props, State> {
     }
 
     this.allCategoriesSubscription = this.contentManager.allCategories$.subscribe(
-      (categories) => {
+      (categories: Category[]) => {
         this.setState({
           categories,
         });
@@ -69,17 +69,17 @@ class SignupCredentialsScreen extends Component<Props, State> {
     this.allCategoriesSubscription.unsubscribe();
   }
 
-  onEmailInputChanged = (email) => {
+  onEmailInputChanged = (email: string) => {
     this.setState({
       email,
     });
   };
-  onPasswordInputChanged = (password) => {
+  onPasswordInputChanged = (password: string) => {
     this.setState({
       password,
     });
   };
-  onConfirmPasswordInputChanged = (confirmPassword) => {
+  onConfirmPasswordInputChanged = (confirmPassword: any) => {
     this.setState({
       confirmPassword,
     });

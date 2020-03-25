@@ -1,6 +1,5 @@
-// TODO: Implement login with AWS Amplify
-import React, {useEffect, useState} from 'react';
-import {Subscription} from 'rxjs'; // eslint-disable-next-line react-native/split-platform-components
+import React, {useEffect, useState, useRef} from 'react';
+import {Subscription} from 'rxjs';
 
 import {View, Image, StyleSheet, BackHandler, ToastAndroid} from 'react-native';
 import {NavigationScreenProp} from 'react-navigation'; // $FlowFixMe
@@ -11,14 +10,15 @@ import Container from 'components/Container';
 import Button from 'components/Button';
 import OrDivider from 'components/OrDivider';
 import {Colors, Dimensions} from 'values';
-import {Category} from 'types/CategoryType';
+import {Category} from 'types/Category';
 import Bottle from '../bottle';
-import SrviceLogoBlue from '../assets/srvice_blue_400px.png';
+import {SrviceLogoBlue} from '../assets';
 import {AuthStatus} from '../enums';
 import {AlertUtils} from '../utils';
-type Props = {
-  navigation: NavigationScreenProp;
-};
+
+interface Props {
+  navigation: NavigationScreenProp<any, any>;
+}
 
 function LoginScreen(props: Props) {
   const authenticationManager = Bottle.AuthenticationManager;
@@ -27,12 +27,11 @@ function LoginScreen(props: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [categories, setCategories] = useState<Category[]>([]);
-  const [shuffle, setShuffle] = useState(false);
+  const [shuffle, setShuffle] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoginPressed, setIsLoginPressed] = useState(false);
-  const [passwordInputRef, setPasswordInputRef] = useState<TextInput | null>(
-    null,
-  );
+  const passwordInputRef = useRef<any>(null);
+
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBackButton);
 
@@ -41,7 +40,7 @@ function LoginScreen(props: Props) {
     }
 
     allCategoriesSubscription = contentManager.allCategories$.subscribe(
-      (newCategories) => {
+      (newCategories: React.SetStateAction<Category[]>) => {
         setCategories(newCategories);
       },
     );
@@ -55,16 +54,14 @@ function LoginScreen(props: Props) {
   }, []);
 
   const toggleShuffle = () => {
-    setShuffle((prevShuffle) => ({
-      shuffle: !prevShuffle,
-    }));
+    setShuffle((prevShuffle: boolean) => !prevShuffle);
   };
 
-  const onEmailInputChanged = (newEmail) => {
+  const onEmailInputChanged = (newEmail: string) => {
     setEmail(newEmail);
   };
 
-  const onPasswordChanged = (newPassword) => {
+  const onPasswordChanged = (newPassword: string) => {
     setPassword(newPassword);
   };
 
@@ -147,7 +144,7 @@ function LoginScreen(props: Props) {
               blurOnSubmit={false}
               onSubmitEditing={() => {
                 if (passwordInputRef) {
-                  passwordInputRef.focus();
+                  passwordInputRef!.current!.focus();
                 }
               }}
               placeholder="Enter your email..."
@@ -155,9 +152,7 @@ function LoginScreen(props: Props) {
               keyboardType="email-address"
             />
             <TextInput
-              setRef={(ref) => {
-                setPasswordInputRef(ref);
-              }}
+              ref={passwordInputRef}
               value={password}
               secureTextEntry
               blurOnSubmit={false}

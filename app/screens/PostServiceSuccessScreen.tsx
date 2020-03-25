@@ -6,8 +6,10 @@ import Container from 'components/Container';
 import Button from 'components/Button';
 import OrDivider from 'components/OrDivider';
 import {Colors} from 'values';
-import {Agent} from 'types/AgentType';
+import {Agent} from 'types/Agent';
 import AgentScreen from './AgentScreen';
+import {Service} from 'types/Service';
+
 type State = {
   agent: Agent | any;
   isLoading: boolean;
@@ -65,7 +67,9 @@ class PostServiceSuccessScreen extends AgentScreen {
       agent: {services},
     } = this.state;
     const newActiveServiceId = navigation.getParam('serviceId');
-    return services.find((service) => service._id === newActiveServiceId);
+    return services.find(
+      (service: Service) => service._id === newActiveServiceId,
+    );
   };
   viewService = async () => {
     const {navigation} = this.props;

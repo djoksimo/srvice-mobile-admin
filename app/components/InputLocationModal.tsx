@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal from 'react-native-modal';
 import {Touchable} from 'components';
@@ -15,7 +16,7 @@ type Props = {
 };
 
 class InputLocationModal extends Component<Props> {
-  onSelectLocation = (locationData: any, locationDetails: any) => {
+  onSelectLocation = (_locationData: any, locationDetails: any) => {
     const {setLocation} = this.props;
     setLocation({
       lat: locationDetails.geometry.location.lat,
@@ -38,8 +39,8 @@ class InputLocationModal extends Component<Props> {
         autoFocus
         returnKeyType="search"
         fetchDetails
-        renderDescription={(row) => row.description}
-        onPress={(data, details = null) => {
+        renderDescription={(row: any) => row.description}
+        onPress={(data: any, details = null) => {
           this.onSelectLocation(data, details);
         }}
         listViewDisplayed="auto"
@@ -94,7 +95,7 @@ class InputLocationModal extends Component<Props> {
                 name="close"
                 color={Colors.white}
                 size={24}
-                iconStyle={styles.closeButton}
+                style={styles.closeButton}
               />
             </View>
           </Touchable>
@@ -107,7 +108,7 @@ class InputLocationModal extends Component<Props> {
         style={styles.modal}
         isVisible={isVisibleModal}
         presentationStyle="overFullScreen">
-        <GoogleMapsInput onSelectLocation={this.onSelectLocation} />
+        <GoogleMapsInput />
       </Modal>
     );
   }

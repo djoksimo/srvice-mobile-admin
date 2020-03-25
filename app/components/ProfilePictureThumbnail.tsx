@@ -26,7 +26,7 @@ class ProfilePictureThumbnail extends PureComponent<Props> {
           name="face"
           color={Colors.primaryDark}
           size={imageWidth}
-          iconStyle={{
+          style={{
             alignSelf: 'center',
           }}
         />

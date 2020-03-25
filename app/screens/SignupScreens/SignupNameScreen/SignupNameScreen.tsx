@@ -7,11 +7,11 @@ import {CategoryBackground} from 'components';
 import Container from 'components/Container';
 import {Colors, Dimensions} from 'values';
 import {AlertUtils} from 'utils';
-import {Category} from 'types/CategoryType';
+import {Category} from 'types/Category';
 import {NameForm} from './SignupNameComponents';
 import Bottle from '../../../bottle';
 type Props = {
-  navigation: NavigationScreenProp;
+  navigation: NavigationScreenProp<any, any>;
 };
 type State = {
   firstName: string;
@@ -46,7 +46,7 @@ class SignupNameScreen extends Component<Props, State> {
     }
 
     this.allCategoriesSubscription = this.contentManager.allCategories$.subscribe(
-      (categories) => {
+      (categories: Category[]) => {
         this.setState({
           categories,
         });
@@ -64,12 +64,12 @@ class SignupNameScreen extends Component<Props, State> {
     this.props.navigation.pop();
     return true;
   };
-  onFirstNameChanged = (firstName) => {
+  onFirstNameChanged = (firstName: string) => {
     this.setState({
       firstName,
     });
   };
-  onLastNameChanged = (lastName) => {
+  onLastNameChanged = (lastName: string) => {
     this.setState({
       lastName,
     });
@@ -101,7 +101,7 @@ class SignupNameScreen extends Component<Props, State> {
           </View>
           <View style={styles.signupContainer}>
             <NameForm
-              email={firstName}
+              firstName={firstName}
               lastName={lastName}
               onFirstNameChanged={this.onFirstNameChanged}
               onLastNameChanged={this.onLastNameChanged}

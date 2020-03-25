@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, View, StyleSheet} from 'react-native';
 import {Card, CategoryIcon, Stars, Text} from 'components';
 import TravelSettings from 'components/TravelSettings';
-import {Category} from 'types/CategoryType';
+import {Category} from 'types/Category';
 import ServiceImageCarousel from './ServiceImageCarousel';
 import {Colors, Dimensions} from 'values';
 import ServiceTimestamps from 'components/ServiceTimestamps';
@@ -31,7 +31,7 @@ const ServiceInfoCard = (props: Props) => {
     updatedAt,
   } = props;
 
-  const renderServiceImage = ({item: pictureUrl}) => (
+  const renderServiceImage = ({item: pictureUrl}: any) => (
     <View style={styles.serviceImageContainer}>
       <Image
         style={styles.serviceImage}

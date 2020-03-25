@@ -1,4 +1,4 @@
-import React, {Component} from 'react'; // eslint-disable-next-line react-native/split-platform-components
+import React, {Component} from 'react';
 
 import {View, StyleSheet, BackHandler, ToastAndroid} from 'react-native';
 import {NavigationScreenProp} from 'react-navigation';
@@ -6,7 +6,7 @@ import {CategoryBackground, Text} from 'components';
 import Container from 'components/Container';
 import Button from 'components/Button';
 import {Colors, Dimensions} from 'values';
-import {Category} from 'types/CategoryType';
+import {Category} from 'types/Category';
 import Bottle from '../bottle';
 type State = {
   isContinuePressed: boolean;
@@ -41,7 +41,7 @@ class SuccessfulSignupScreen extends Component<Props, State> {
     }
 
     this.allCategoriesSubscription = this.contentManager.allCategories$.subscribe(
-      (categories) => {
+      (categories: Category[]) => {
         this.setState({
           categories,
         });
@@ -83,9 +83,9 @@ class SuccessfulSignupScreen extends Component<Props, State> {
           <Text style={styles.congratulationText} scale={Text.Scale.H3}>
             Congratulations!
           </Text>
-          <Text style={styles.instructionsText} scale={Text.Scale.H2}>
+          <Text style={styles.instructionsText} scale={Text.Scale.H4}>
             You are now officially a Srvice Agent! Press
-            <Text style={styles.instructionsTextBold} scale={Text.Scale.H2}>
+            <Text style={styles.instructionsTextBold} scale={Text.Scale.H4}>
               {' CONTINUE '}
             </Text>
             to post your first listing and to polish your Agent profile.
@@ -107,7 +107,7 @@ const {screenWidth} = Dimensions;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: Colors.screenBackground,
     flexDirection: 'column',
   },
   congratulationContainer: {

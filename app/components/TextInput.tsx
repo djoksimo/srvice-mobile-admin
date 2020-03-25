@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   TextInput as ReactNativeTextInput,
   StyleSheet,
@@ -14,39 +14,25 @@ interface Props extends TextInputProps {
   onChangeText: (text: string) => void;
 }
 
-class TextInput extends Component<Props & any> {
-  inputRef: React.LegacyRef<TextInput> | undefined;
+function TextInput(
+  {style, onSubmitEditing = () => {}, onChangeText, ...rest}: Props,
+  ref: any,
+) {
+  const inputTextStyle: TextStyle[] = [styles.base];
 
-  static defaultProps = {
-    style: null,
-    setRef: () => {},
-    onSubmitEditing: () => {},
-  };
-  setRef = (ref: React.LegacyRef<TextInput>) => {
-    this.inputRef = ref;
-
-    if (this.props.setRef) {
-      this.props.setRef(this.inputRef);
-    }
-  };
-
-  render() {
-    const {style, onSubmitEditing, onChangeText, ...props} = this.props;
-    const inputTextStyle = [styles.base];
-
-    if (style) {
-      inputTextStyle.push(style);
-    }
-
-    return (
-      <ReactNativeTextInput
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-        style={inputTextStyle}
-        {...props}
-      />
-    );
+  if (style) {
+    inputTextStyle.push(style);
   }
+
+  return (
+    <ReactNativeTextInput
+      onChangeText={onChangeText}
+      onSubmitEditing={onSubmitEditing}
+      style={inputTextStyle}
+      ref={ref}
+      {...rest}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
@@ -66,4 +52,4 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
 });
-export default TextInput;
+export default React.forwardRef(TextInput);

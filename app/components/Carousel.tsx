@@ -1,28 +1,29 @@
 import React, {PureComponent} from 'react';
-import SnapCarousel from 'react-native-snap-carousel';
+import SnapCarousel, {CarouselProperties} from 'react-native-snap-carousel';
 import {View} from 'react-native';
 import {Dimensions} from 'values';
-type Props = {
-  renderItem: Function;
-  list: Array<any>;
-  width?: number;
-};
 
-class Carousel extends PureComponent<Props> {
+interface Props extends CarouselProperties<any> {
+  renderItem: (item: any) => JSX.Element;
+  list: any[];
+  width?: number;
+  ref: any;
+}
+
+class Carousel extends PureComponent<Props & any> {
   carousel: any;
   static defaultProps = {
     width: Dimensions.screenWidth - 96,
   };
 
   render() {
-    const {list, renderItem, width} = this.props;
+    const {list, renderItem, width, ...rest} = this.props;
     const {screenWidth} = Dimensions;
     return (
       <View>
         <SnapCarousel
-          {...this.props}
           removeClippedSubviews={false}
-          ref={(c) => {
+          ref={(c: any) => {
             this.carousel = c;
           }}
           data={list}
@@ -31,6 +32,7 @@ class Carousel extends PureComponent<Props> {
           itemWidth={width}
           inactiveSlideScale={0.9}
           inactiveSlideOpacity={0.8}
+          {...rest}
         />
       </View>
     );

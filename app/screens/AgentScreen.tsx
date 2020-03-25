@@ -1,11 +1,11 @@
 import {Component} from 'react';
 import {NavigationScreenProp} from 'react-navigation';
-import {Agent} from 'types/AgentType';
+import {Agent} from 'types/Agent';
 import {AgentManager, AuthenticationManager} from '../managers';
 import Bottle from '../bottle';
 import {AuthStatus} from '../enums';
 type Props = {
-  navigation: NavigationScreenProp;
+  navigation: NavigationScreenProp<any, any>;
 };
 type State = {
   agent: Agent | any;
@@ -26,11 +26,13 @@ class AgentScreen extends Component<Props, State & any> {
   }
 
   componentDidMount() {
-    this.agentSubscription = this.agentManager.agent$.subscribe((agent) => {
-      this.setState({
-        agent,
-      });
-    });
+    this.agentSubscription = this.agentManager.agent$.subscribe(
+      (agent: Agent) => {
+        this.setState({
+          agent,
+        });
+      },
+    );
   }
 
   componentWillUnmount() {

@@ -6,9 +6,10 @@ import MapView, {Circle, Marker} from 'react-native-maps';
 import {Colors, Dimensions} from 'values';
 import {Card, Touchable} from 'components';
 import Heading from './Heading';
+
 type Props = {
-  onDismissModal: Function;
-  isLocationModalVisible: Function;
+  onDismissModal: () => void;
+  isLocationModalVisible: boolean;
   latitude: number;
   longitude: number;
   radius: number;
