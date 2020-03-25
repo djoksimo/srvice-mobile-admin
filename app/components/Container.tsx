@@ -6,13 +6,15 @@ import {
   Image,
   SafeAreaView,
   StatusBar,
+  ViewProps,
 } from 'react-native';
 import {NavigationScreenProp} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Colors} from 'values';
 import {SrviceLogoBetaWhite, SrviceLogoBlue} from '../assets';
 import MenuButton from './MenuButton';
-type Props = {
+
+interface Props extends ViewProps {
   navigation?: NavigationScreenProp<any, any>;
   backButtonHandler?: Function;
   glow?: boolean;
@@ -22,7 +24,7 @@ type Props = {
   children: any;
   onMenuButtonPressed?: () => void;
   menu?: boolean;
-};
+}
 
 class Container extends PureComponent<Props> {
   static defaultProps = {

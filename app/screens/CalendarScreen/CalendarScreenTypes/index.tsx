@@ -1,0 +1,1 @@
+export {AgendaItem} from './AgendaItem';

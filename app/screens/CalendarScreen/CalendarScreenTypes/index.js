@@ -1,1 +1,0 @@
-export { AgendaItem } from "./AgendaItem";
