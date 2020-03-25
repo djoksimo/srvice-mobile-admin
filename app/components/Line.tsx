@@ -1,8 +1,6 @@
-// @flow
-import React from "react";
-import { View, StyleSheet } from "react-native";
-
-import { Colors } from "values";
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import {Colors} from 'values';
 
 const Line = () => <View style={styles.line} />;
 

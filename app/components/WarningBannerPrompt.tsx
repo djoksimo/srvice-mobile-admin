@@ -1,15 +1,13 @@
-// @flow
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-
 import {Colors, Dimensions} from 'values';
 import {Text} from '.';
 import Button from './Button';
 
-type Props = {
+interface Props {
   message: string;
-  onPromptPressed: Function;
-};
+  onPromptPressed: () => void;
+}
 
 const WarningBannerPrompt = (props: Props) => {
   const {message, onPromptPressed} = props;
@@ -50,5 +48,4 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
 });
-
 export default WarningBannerPrompt;

@@ -1,32 +1,28 @@
-// @flow
-import React, { PureComponent } from "react";
-import SnapCarousel from "react-native-snap-carousel";
-import { View } from "react-native";
-
-import { Dimensions } from "values";
-
+import React, {PureComponent} from 'react';
+import SnapCarousel from 'react-native-snap-carousel';
+import {View} from 'react-native';
+import {Dimensions} from 'values';
 type Props = {
-  renderItem: Function,
-  list: Array<any>,
-  width?: number,
+  renderItem: Function;
+  list: Array<any>;
+  width?: number;
 };
 
 class Carousel extends PureComponent<Props> {
   carousel: any;
-
   static defaultProps = {
     width: Dimensions.screenWidth - 96,
   };
 
   render() {
-    const { list, renderItem, width } = this.props;
-    const { screenWidth } = Dimensions;
+    const {list, renderItem, width} = this.props;
+    const {screenWidth} = Dimensions;
     return (
       <View>
         <SnapCarousel
           {...this.props}
           removeClippedSubviews={false}
-          ref={c => {
+          ref={(c) => {
             this.carousel = c;
           }}
           data={list}

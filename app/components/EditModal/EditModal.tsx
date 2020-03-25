@@ -1,20 +1,17 @@
-// @flow
-import React from "react";
-import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
-import Modal from "react-native-modal";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
-import { Colors, Dimensions } from "values";
-import { TextInput, Card, Touchable } from "components";
-import Button from "components/Button";
-
+import React from 'react';
+import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
+import Modal from 'react-native-modal';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Colors, Dimensions} from 'values';
+import {TextInput, Card, Touchable} from 'components';
+import Button from 'components/Button';
 type Props = {
-  isModalVisible: boolean,
-  inputValue: string,
-  placeholderText: String,
-  onChangeText: (inputValue: string) => void,
-  onSavePressed: () => void,
-  onDismissPressed: () => void,
+  isModalVisible: boolean;
+  inputValue: string;
+  placeholderText: string;
+  onChangeText: (inputValue: string) => void;
+  onSavePressed: () => void;
+  onDismissPressed: () => void;
 };
 
 const EditModal = (props: Props) => {
@@ -26,10 +23,13 @@ const EditModal = (props: Props) => {
     onSavePressed,
     onDismissPressed,
   } = props;
-
   const numLines = Math.floor(inputValue.length / 25) + 1;
-  const conditionalTextInputStyle = numLines > 1 ? { height: numLines * 16 } : {};
-
+  const conditionalTextInputStyle =
+    numLines > 1
+      ? {
+          height: numLines * 16,
+        }
+      : {};
   return (
     <Modal
       swipeDirection="down"
@@ -37,8 +37,7 @@ const EditModal = (props: Props) => {
       backdropColor={Colors.screenBackground}
       isVisible={isModalVisible}
       onSwipeComplete={onDismissPressed}
-      onBackdropPress={onDismissPressed}
-    >
+      onBackdropPress={onDismissPressed}>
       <KeyboardAvoidingView behavior="position">
         <Card style={styles.modalCard}>
           <View style={styles.dismissButton}>
@@ -66,14 +65,14 @@ const EditModal = (props: Props) => {
   );
 };
 
-const { screenWidth } = Dimensions;
+const {screenWidth} = Dimensions;
 const styles = StyleSheet.create({
   bottomModal: {
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     margin: 0,
   },
   dismissButton: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     marginRight: 8,
   },
   modalCard: {
@@ -84,6 +83,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     shadowOffset: {
+      width: 0,
       height: -8,
     },
   },
@@ -92,5 +92,4 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
 });
-
 export default EditModal;

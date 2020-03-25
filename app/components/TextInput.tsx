@@ -1,44 +1,47 @@
-// @flow
-import React, { Component } from "react";
-import { TextInput as ReactNativeTextInput, StyleSheet } from "react-native";
-import type { TextStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
+import React, {Component} from 'react';
+import {
+  TextInput as ReactNativeTextInput,
+  StyleSheet,
+  TextStyle,
+  TextInputProps,
+} from 'react-native';
+import {Colors} from 'values';
 
-import { Colors } from "values";
-
-type Props = {
-  style?: TextStyleProp,
-  setRef?: () => TextInput,
-  onSubmitEditing?: (e?: any) => void,
-  onChangeText: (text: string) => void,
-};
+interface Props extends TextInputProps {
+  style?: TextStyle;
+  setRef?: () => void;
+  onSubmitEditing?: (e?: any) => void;
+  onChangeText: (text: string) => void;
+}
 
 class TextInput extends Component<Props & any> {
-  inputRef: TextInput;
+  inputRef: React.LegacyRef<TextInput> | undefined;
 
   static defaultProps = {
     style: null,
     setRef: () => {},
     onSubmitEditing: () => {},
   };
-
-  setRef = (ref: TextInput) => {
+  setRef = (ref: React.LegacyRef<TextInput>) => {
     this.inputRef = ref;
+
     if (this.props.setRef) {
       this.props.setRef(this.inputRef);
     }
   };
 
   render() {
-    const { style, onSubmitEditing, onChangeText, ...props } = this.props;
+    const {style, onSubmitEditing, onChangeText, ...props} = this.props;
     const inputTextStyle = [styles.base];
+
     if (style) {
       inputTextStyle.push(style);
     }
+
     return (
       <ReactNativeTextInput
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
-        ref={this.setRef}
         style={inputTextStyle}
         {...props}
       />
@@ -63,5 +66,4 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
 });
-
 export default TextInput;

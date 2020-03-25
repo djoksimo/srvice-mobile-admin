@@ -1,29 +1,33 @@
-// @flow
-import React, {PureComponent} from 'react';
-import type {Node} from 'react';
-import {Text as ReactNativeText, StyleSheet, View} from 'react-native';
-import type {TextStyleProp} from 'react-native/Libraries/StyleSheet/StyleSheet';
-
+import React, {Component} from 'react';
+import {
+  Text as ReactNativeText,
+  StyleSheet,
+  View,
+  TextStyle,
+} from 'react-native';
 import {Colors, Fonts} from 'values';
-import type {TextScale} from 'types/TextScale';
+import {TextScale} from 'types/TextScale';
 
-type Props = {
+interface SrviceTextStyle extends Partial<TextStyle> {
+  fontFamily?: Fonts;
+}
+
+interface Props {
   // TODO: remove wherever style prop is used in other components - Danilo
-  style?: TextStyleProp;
+  style?: Partial<TextStyle> | Partial<TextStyle>[];
   scale?: TextScale | string;
   color?: string;
   withOptionalTag?: boolean;
-  children?: Node;
-};
+  children?: React.ReactNode;
+}
 
-class Text extends PureComponent<Props> {
+class Text extends Component<Props> {
   static defaultProps = {
     scale: '',
     color: Colors.text,
     style: null,
     withOptionalTag: false,
   };
-
   static Scale: TextScale = {
     H3: 'h3',
     H4: 'h4',
@@ -42,50 +46,64 @@ class Text extends PureComponent<Props> {
       color,
       withOptionalTag,
       children,
-      ...props
+      ...restProps
     } = this.props;
-    const textStyle = [styles.base];
+
+    const textStyle: SrviceTextStyle[] = [styles.base];
+
     switch (scale) {
       case Text.Scale.H3:
         textStyle.push(styles.h3);
         break;
+
       case Text.Scale.H4:
         textStyle.push(styles.h4);
         break;
+
       case Text.Scale.H5:
         textStyle.push(styles.h5);
         break;
+
       case Text.Scale.H6:
         textStyle.push(styles.h6);
         break;
+
       case Text.Scale.SUBTITLE:
         textStyle.push(styles.subtitle);
         break;
+
       case Text.Scale.BODY:
         textStyle.push(styles.body);
         break;
+
       case Text.Scale.CAPTION:
         textStyle.push(styles.caption);
         break;
+
       case Text.Scale.BUTTON:
         textStyle.push(styles.button);
         break;
+
       default:
         textStyle.push(styles.body);
         break;
     }
+
     if (color) {
-      textStyle.push({color});
+      textStyle.push({
+        color: color ?? Colors.text,
+        fontFamily: Fonts.RegularLato,
+      });
     }
+
     if (style) {
       textStyle.push(style);
     }
 
     const optionalText = '(Optional)';
-
     const textComponent = withOptionalTag ? (
       <View style={styles.textContainer}>
-        <ReactNativeText {...props} style={textStyle}>
+        <ReactNativeText {...restProps} style={textStyle}>
           {children}
         </ReactNativeText>
         <ReactNativeText
@@ -94,12 +112,12 @@ class Text extends PureComponent<Props> {
         </ReactNativeText>
       </View>
     ) : (
-      <ReactNativeText {...props} style={textStyle}>
+      <ReactNativeText {...restProps} style={textStyle}>
         {children}
       </ReactNativeText>
     );
 
-    return textComponent;
+    return <>{textComponent}</>;
   }
 }
 
@@ -157,5 +175,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
 export default Text;

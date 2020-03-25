@@ -1,10 +1,8 @@
-// @flow
-import React, { PureComponent } from "react";
-import { Image } from "react-native";
-
+import React, {PureComponent} from 'react';
+import {Image} from 'react-native';
 type Props = {
-  iconUrl: string,
-  scale?: number,
+  iconUrl: string;
+  scale?: number;
 };
 
 class CategoryIcon extends PureComponent<Props> {
@@ -13,15 +11,16 @@ class CategoryIcon extends PureComponent<Props> {
   };
 
   render() {
-    const { iconUrl, scale } = this.props;
-
+    const {iconUrl, scale} = this.props;
     return (
       <Image
         style={{
           width: scale === undefined ? 36 : 36 * scale,
           height: scale === undefined ? 36 : 36 * scale,
         }}
-        source={{ uri: iconUrl }}
+        source={{
+          uri: iconUrl,
+        }}
         resizeMode="contain"
       />
     );

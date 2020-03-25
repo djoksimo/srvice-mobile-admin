@@ -1,24 +1,20 @@
-// @flow
-import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
-import { Colors } from "values";
-import { Text, Touchable } from ".";
-
+import React, {Component} from 'react';
+import {View, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Colors} from 'values';
+import {Text, Touchable} from '.';
 type Props = {
-  text: string,
-  onAddPressed?: Function,
+  text: string;
+  onAddPressed?: () => void;
 };
 
 class SectionHeading extends Component<Props> {
   static defaultProps = {
-    onAddPressed: null,
+    onAddPressed: () => {},
   };
 
   render() {
-    const { text, onAddPressed } = this.props;
-
+    const {text, onAddPressed} = this.props;
     const addButton =
       onAddPressed !== null ? (
         <View style={styles.addBtnContainer}>
@@ -27,7 +23,6 @@ class SectionHeading extends Component<Props> {
           </Touchable>
         </View>
       ) : null;
-
     return (
       <View style={styles.headingContainer}>
         <Text scale={Text.Scale.H5}>{text}</Text>
@@ -39,18 +34,17 @@ class SectionHeading extends Component<Props> {
 
 const styles = StyleSheet.create({
   headingContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignContent: 'center',
+    alignItems: 'center',
     paddingTop: 16,
     paddingBottom: 16,
   },
   addBtnContainer: {
     paddingLeft: 16,
-    alignContent: "center",
+    alignContent: 'center',
     paddingBottom: 0,
   },
 });
-
 export default SectionHeading;

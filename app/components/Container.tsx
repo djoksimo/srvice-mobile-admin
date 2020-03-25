@@ -1,26 +1,27 @@
-// @flow
-import React, { PureComponent } from "react";
-import type { Element } from "react";
-import { StyleSheet, View, TouchableOpacity, Image, SafeAreaView, StatusBar } from "react-native";
-import { NavigationScreenProp } from "react-navigation";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
-import { Colors } from "values";
-import SrviceLogoBetaWhite from "../assets/srvice_white_beta_400px.png";
-import SrviceLogoBlue from "../assets/srvice_blue_400px.png";
-
-import MenuButton from "./MenuButton";
-
+import React, {PureComponent} from 'react';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
+import {NavigationScreenProp} from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Colors} from 'values';
+import {SrviceLogoBetaWhite, SrviceLogoBlue} from '../assets';
+import MenuButton from './MenuButton';
 type Props = {
-  navigation?: NavigationScreenProp | any,
-  backButtonHandler?: Function,
-  glow?: boolean,
-  whiteLogo?: boolean,
-  blueLogo?: boolean,
-  search?: boolean,
-  children: any,
-  onMenuButtonPressed?: Function,
-  menu?: boolean,
+  navigation?: NavigationScreenProp<any, any>;
+  backButtonHandler?: Function;
+  glow?: boolean;
+  whiteLogo?: boolean;
+  blueLogo?: boolean;
+  search?: boolean;
+  children: any;
+  onMenuButtonPressed?: () => void;
+  menu?: boolean;
 };
 
 class Container extends PureComponent<Props> {
@@ -32,15 +33,16 @@ class Container extends PureComponent<Props> {
     whiteLogo: false,
     blueLogo: false,
     menu: false,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onMenuButtonPressed: () => {},
   };
-
   onBackClicked = () => {
-    const { navigation, backButtonHandler } = this.props;
+    const {navigation, backButtonHandler} = this.props;
+
     if (backButtonHandler === null) {
-      navigation.goBack();
+      navigation?.goBack();
     } else {
-      backButtonHandler();
+      backButtonHandler && backButtonHandler();
     }
   };
 
@@ -52,45 +54,54 @@ class Container extends PureComponent<Props> {
       blueLogo,
       search,
       children,
-      backButtonHandler,
       menu,
       onMenuButtonPressed,
       ...props
     } = this.props;
-
-    const backButton: Element<any> = <Icon name="arrow-left" color={Colors.white} size={24} />;
-    const backButtonView: Element<any> = navigation ? (
+    const backButton: React.ReactNode = (
+      <Icon name="arrow-left" color={Colors.white} size={24} />
+    );
+    const backButtonView: React.ReactNode = navigation ? (
       <TouchableOpacity onPress={this.onBackClicked}>
-        {glow ? <View style={styles.glowCircle}>{backButton}</View> : backButton}
+        {glow ? (
+          <View style={styles.glowCircle}>{backButton}</View>
+        ) : (
+          backButton
+        )}
       </TouchableOpacity>
     ) : (
       <View style={styles.invisibleIcon} />
     );
     const whiteLogoImage = whiteLogo ? (
-      <Image style={styles.logo} source={SrviceLogoBetaWhite} resizeMode="contain" />
+      <Image
+        style={styles.logo}
+        source={SrviceLogoBetaWhite}
+        resizeMode="contain"
+      />
     ) : null;
-
     const blueLogoImage = blueLogo ? (
       <Image style={styles.logo} source={SrviceLogoBlue} resizeMode="contain" />
     ) : null;
-
-    const searchButton: Element<any> = search ? (
+    const searchButton: React.ReactNode = search ? (
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       <TouchableOpacity onPress={() => {}}>
         <Icon name="magnify" color={Colors.white} size={24} />
       </TouchableOpacity>
     ) : (
       <View style={styles.invisibleIcon} />
     );
-
-    const sideMenuButton: Element<any> | any = menu ? (
+    const sideMenuButton: React.ReactNode | null = menu ? (
       <View style={styles.menuButtonContainer}>
-        <MenuButton onPress={onMenuButtonPressed} />
+        <MenuButton onPress={onMenuButtonPressed!} />
       </View>
     ) : null;
-
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar backgroundColor={Colors.blandLight} barStyle="dark-content" hidden={false} />
+        <StatusBar
+          backgroundColor={Colors.blandLight}
+          barStyle="dark-content"
+          hidden={false}
+        />
         <View {...props}>
           {children}
           <View style={styles.topBar}>
@@ -112,17 +123,17 @@ const styles = StyleSheet.create({
   },
   topBar: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    position: "absolute",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    position: 'absolute',
     top: 16,
     left: 16,
     right: 16,
   },
   glowCircle: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 36,
     height: 36,
     borderRadius: 18,
@@ -142,5 +153,4 @@ const styles = StyleSheet.create({
     right: -16,
   },
 });
-
 export default Container;

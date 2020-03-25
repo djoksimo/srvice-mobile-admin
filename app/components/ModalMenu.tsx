@@ -1,34 +1,34 @@
-// @flow
-import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-import Modal from "react-native-modal";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
-import { Colors } from "values";
-import type { MenuButton } from "types/MenuButton";
-import { Text, Touchable, Card } from "components";
-
+import React, {Component} from 'react';
+import {View, StyleSheet} from 'react-native';
+import Modal from 'react-native-modal';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Colors} from 'values';
+import {MenuButton} from 'types/MenuButton';
+import {Text, Touchable, Card} from 'components';
 type Props = {
-  isOpen: boolean,
-  menuButtons: Array<MenuButton>,
+  isOpen: boolean;
+  menuButtons: Array<MenuButton>;
 };
 
 class ModalMenu extends Component<Props> {
   render() {
-    const { isOpen, menuButtons, ...modalProps } = this.props;
-
+    const {isOpen, menuButtons, ...modalProps} = this.props;
     const formattedMenuButtons = menuButtons.map((btn: MenuButton, index) => {
-      const { icon, text, action } = btn;
+      const {icon, text, action} = btn;
       return (
         <View key={index}>
           <Touchable
             onPress={() => {
               action();
-            }}
-          >
+            }}>
             <View style={styles.menuButton}>
               <View style={styles.actionIconContainer}>
-                <Icon name={icon} size={24} color={Colors.primary} iconStyle={styles.actionIcon} />
+                <Icon
+                  name={icon}
+                  size={24}
+                  color={Colors.primary}
+                  iconStyle={styles.actionIcon}
+                />
               </View>
               <View>
                 <Text scale={Text.Scale.BUTTON} color={Colors.primary}>
@@ -40,13 +40,11 @@ class ModalMenu extends Component<Props> {
         </View>
       );
     });
-
     const menu = (
       <Card>
         <View style={styles.menuButtonsContainer}>{formattedMenuButtons}</View>
       </Card>
     );
-
     return (
       <Modal isVisible={isOpen} {...modalProps}>
         {menu}
@@ -57,20 +55,21 @@ class ModalMenu extends Component<Props> {
 
 const styles = StyleSheet.create({
   menuButtonsContainer: {
-    justifyContent: "center",
+    justifyContent: 'center',
     paddingBottom: 16,
     paddingTop: 16,
     paddingLeft: 16,
   },
   menuButton: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 8,
   },
   actionIconContainer: {
     paddingRight: 8,
   },
-  actionIcon: { padding: 0 },
+  actionIcon: {
+    padding: 0,
+  },
 });
-
 export default ModalMenu;

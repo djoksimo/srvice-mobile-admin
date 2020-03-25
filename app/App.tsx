@@ -13,8 +13,6 @@ import {AlertUtils} from 'utils';
 import {
   PostServiceScreen,
   RequestListScreen,
-  ConversationListScreen,
-  ConversationScreen,
   AccountScreen,
   SignupNameScreen,
   SignupCredentialsScreen,
@@ -120,14 +118,6 @@ const RootStack = createStackNavigator(
                 renderIcon('calendar', tintColor, focused),
             }),
           },
-          ConversationListScreen: {
-            screen: ConversationListScreen,
-            navigationOptions: () => ({
-              title: 'Chat',
-              tabBarIcon: ({tintColor, focused}: TabBarIconParams) =>
-                renderIcon('message-text', tintColor, focused),
-            }),
-          },
           AccountScreen: {
             screen: AccountScreen,
             navigationOptions: () => ({
@@ -141,7 +131,6 @@ const RootStack = createStackNavigator(
           tabBarOptions: {
             activeTintColor: Colors.black,
             inactiveTintColor: Colors.blandDark,
-            keyboardHidesTabBar: true,
             style: {
               shadowColor: Colors.bland,
               shadowOffset: {
@@ -182,9 +171,6 @@ const RootStack = createStackNavigator(
     },
     SignupStack: {
       screen: SignupStack,
-    },
-    ConversationScreen: {
-      screen: ConversationScreen,
     },
     SuccessfulSignupScreen: {
       screen: SuccessfulSignupScreen,

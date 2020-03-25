@@ -1,31 +1,29 @@
-// @flow
-import React, { PureComponent } from "react";
-import { StyleSheet, View } from "react-native";
-import { Colors } from "values";
-import type { BadgeStatus } from "types/BadgeStatus";
-import { Text } from ".";
+import React, {PureComponent} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Colors} from 'values';
+import {BadgeStatus} from 'types/BadgeStatus';
+import {Text} from '.';
 
-type Props = {
-  status?: string,
-  badgeText: string,
-  badgeColor?: string,
-};
+interface Props {
+  status?: string;
+  badgeText: string;
+  badgeColor?: string;
+}
 
 class Badge extends PureComponent<Props> {
   static defaultProps = {
     badgeColor: Colors.bland,
-    status: "",
+    status: '',
   };
-
   static Status: BadgeStatus = {
-    GOOD: "good",
-    WARN: "warn",
-    BAD: "bad",
+    GOOD: 'good',
+    WARN: 'warn',
+    BAD: 'bad',
   };
 
   render() {
-    const { status, badgeText, badgeColor } = this.props;
-    let bgColor = "";
+    const {status, badgeText, badgeColor} = this.props;
+    let bgColor = '';
 
     if (badgeColor) {
       bgColor = badgeColor;
@@ -34,19 +32,28 @@ class Badge extends PureComponent<Props> {
         case Badge.Status.GOOD:
           bgColor = Colors.success;
           break;
+
         case Badge.Status.WARN:
           bgColor = Colors.secondary;
           break;
+
         case Badge.Status.BAD:
           bgColor = Colors.error;
           break;
+
         default:
           bgColor = Colors.bland;
       }
     }
 
     return (
-      <View style={[styles.badge, { backgroundColor: bgColor }]}>
+      <View
+        style={[
+          styles.badge,
+          {
+            backgroundColor: bgColor,
+          },
+        ]}>
         <Text color={Colors.white}>{badgeText}</Text>
       </View>
     );
@@ -61,9 +68,8 @@ const styles = StyleSheet.create({
     paddingRight: 8,
     borderRadius: 4,
     backgroundColor: Colors.success,
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
-
 export default Badge;

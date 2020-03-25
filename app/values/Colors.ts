@@ -1,4 +1,4 @@
-export default {
+export const Colors = {
   primary: '#01579B',
   primaryLight: '#4F83CC',
   primaryDark: '#002F6C',
@@ -21,3 +21,7 @@ export default {
   pink: '#B46C86',
   translucentPrimaryLight: 'rgba(79,131,204,0.50)',
 };
+
+type Keys = keyof typeof Colors;
+
+export type ColorType = typeof Colors[Keys];

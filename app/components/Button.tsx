@@ -1,22 +1,20 @@
-// @flow
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import {
   Platform,
   TouchableHighlight,
   TouchableNativeFeedback,
   View,
   StyleSheet,
-} from "react-native";
-
-import { Colors } from "values";
-import { Text } from "components";
-
+} from 'react-native';
+import {Colors} from 'values';
+import {Text} from 'components';
 type Props = {
-  title: string,
-  color?: string,
-  titleColor?: string,
-  borderColor?: any,
-  isDisabled?: boolean,
+  title: string;
+  color?: string;
+  titleColor?: string;
+  borderColor?: any;
+  isDisabled?: boolean;
+  onPress: () => void;
 };
 
 class Button extends Component<Props> {
@@ -36,19 +34,27 @@ class Button extends Component<Props> {
       isDisabled,
       ...props
     } = this.props;
-
-    return Platform.OS === "ios" ? (
+    return Platform.OS === 'ios' ? (
       <TouchableHighlight
         disabled={isDisabled}
         style={[
           styles.button,
-          { backgroundColor: !isDisabled ? color : Colors.primaryLight, borderColor },
+          {
+            backgroundColor: !isDisabled ? color : Colors.primaryLight,
+            borderColor,
+          },
         ]}
         activeOpacity={0.6}
         underlayColor={color}
-        {...props}
-      >
-        <Text scale={Text.Scale.BUTTON} style={[styles.buttonText, { color: titleColor }]}>
+        {...props}>
+        <Text
+          scale={Text.Scale.BUTTON}
+          style={[
+            styles.buttonText,
+            {
+              color: titleColor,
+            },
+          ]}>
           {title.toUpperCase()}
         </Text>
       </TouchableHighlight>
@@ -57,15 +63,23 @@ class Button extends Component<Props> {
         disabled={isDisabled}
         background={TouchableNativeFeedback.Ripple(Colors.bland)}
         {...props}
-        useForeground
-      >
+        useForeground>
         <View
           style={[
             styles.button,
-            { backgroundColor: !isDisabled ? color : Colors.primaryLight, borderColor },
-          ]}
-        >
-          <Text scale={Text.Scale.BUTTON} style={[styles.buttonText, { color: titleColor }]}>
+            {
+              backgroundColor: !isDisabled ? color : Colors.primaryLight,
+              borderColor,
+            },
+          ]}>
+          <Text
+            scale={Text.Scale.BUTTON}
+            style={[
+              styles.buttonText,
+              {
+                color: titleColor,
+              },
+            ]}>
             {title.toUpperCase()}
           </Text>
         </View>
@@ -76,13 +90,13 @@ class Button extends Component<Props> {
 
 const styles = StyleSheet.create({
   button: {
-    justifyContent: "center",
+    justifyContent: 'center',
     borderRadius: 24,
     paddingLeft: 48,
     paddingRight: 48,
     paddingTop: 8,
     paddingBottom: 8,
-    alignSelf: "center",
+    alignSelf: 'center',
     elevation: 5,
     backgroundColor: Colors.primary,
     shadowColor: Colors.black,
@@ -95,9 +109,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   buttonText: {
-    textAlign: "center",
-    alignSelf: "center",
+    textAlign: 'center',
+    alignSelf: 'center',
   },
 });
-
 export default Button;

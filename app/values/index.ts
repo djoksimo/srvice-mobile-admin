@@ -1,4 +1,4 @@
-export {default as Colors} from './Colors';
+export {Colors, ColorType} from './Colors';
 export {default as Fonts} from './Fonts';
 export {default as Null} from './Null';
 export {default as Dimensions} from './Dimensions';
