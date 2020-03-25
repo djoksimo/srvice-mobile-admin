@@ -1,13 +1,12 @@
-// @flow
-import { BehaviorSubject } from "rxjs";
+import {BehaviorSubject} from 'rxjs';
 
-import type { Schedule } from "types/ScheduleType";
-import { CacheService, ScheduleService } from "../services";
+import {Schedule} from 'types/ScheduleType';
+import {CacheService, ScheduleService} from '../services';
 
 class ScheduleManager {
   cacheService: CacheService;
   scheduleService: ScheduleService;
-  schedule$: BehaviorSubject;
+  schedule$: BehaviorSubject<any>;
 
   constructor(scheduleService: ScheduleService, cacheService: CacheService) {
     this.scheduleService = scheduleService;
@@ -20,7 +19,7 @@ class ScheduleManager {
       const authHeaders = await this.cacheService.getAuthHeader();
       return this.scheduleService.createSchedule(
         {
-          agentId: authHeaders.agentId,
+          agentId: authHeaders?.agentId ?? '',
           availability: [],
         },
         authHeaders,
@@ -34,7 +33,11 @@ class ScheduleManager {
     return Object.assign({}, currentSchedule);
   }
 
-  async updateSchedule(currentSchedule: Schedule, field: string, newData: any): Promise<any> {
+  async updateSchedule(
+    currentSchedule: Schedule,
+    field: string,
+    newData: any,
+  ): Promise<any> {
     try {
       const scheduleCopy = ScheduleManager.createScheduleCopy(currentSchedule);
       scheduleCopy[field] = newData;
