@@ -22,9 +22,9 @@ function TextInput(
 
   if (style) {
     if (Array.isArray(style)) {
-      inputTextStyle.push(style as TextStyle);
-    } else {
       inputTextStyle.push(...(style as TextStyle[]));
+    } else {
+      inputTextStyle.push(style as TextStyle);
     }
   }
 
@@ -56,4 +56,5 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
 });
+
 export default React.forwardRef(TextInput);
