@@ -1,0 +1,14 @@
+export const AUTH_SIGNUP = '/auth/agent/signup';
+export const AUTH_VERIFY_CODE = '/auth/agent/confirm';
+export const AUTH_RESEND_CODE = '/auth/resend-confirmation';
+export const AUTH_LOGIN = '/auth/agent/login';
+export const AUTH_VERIFY_TOKEN = '/auth/agent/token';
+export const AGENT_ENDPOINT = '/agent';
+export const SERVICE_ENDPOINT = '/service';
+export const CATEGORY_ENDPOINT = '/category/home';
+export const PICTURES_UPLOAD_ENDPOINT = '/file/upload/pictures';
+export const OFFERING_ENDPOINT = '/offering';
+export const CHAT_AUTH_ENDPOINT = '/chat/auth';
+export const CHAT_NEW_USER_ENDPOINT = '/chat/user';
+export const BOOKING_AGENT_ACCEPT_ENDPOINT = '/booking/agent/accept';
+export const SCHEDULE_ENDPOINT = '/schedule';

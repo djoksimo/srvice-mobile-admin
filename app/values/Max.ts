@@ -1,4 +1,3 @@
-// @flow
 export default {
   serviceTitle: {
     full: 100,

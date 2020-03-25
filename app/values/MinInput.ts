@@ -1,4 +1,3 @@
-// @flow
 export default {
   serviceTitle: 10,
   serviceDescription: 50,
