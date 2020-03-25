@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     alignContent: "space-between",
   },
   pickerTextStyle: {
-    fontFamily: Fonts.regularLato,
+    fontFamily: Fonts.RegularLato,
     fontSize: 16,
     letterSpacing: 0.4,
   },

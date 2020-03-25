@@ -1,30 +1,34 @@
 // @flow
-import React from "react";
-import { View, Alert } from "react-native";
-import { NavigationScreenProp } from "react-navigation";
-import _ from "lodash";
-import { ExpandableCalendar, AgendaList, CalendarProvider } from "react-native-calendars";
+import React from 'react';
+import {View, Alert} from 'react-native';
+import {NavigationScreenProp} from 'react-navigation';
+import _ from 'lodash';
+import {
+  ExpandableCalendar,
+  AgendaList,
+  CalendarProvider,
+} from 'react-native-calendars';
 
-import type { Agent } from "types/AgentType";
-import { Text, Touchable, Loading } from "components";
-import Container from "components/Container";
-import WarningBannerPrompt from "components/WarningBannerPrompt";
-import { Colors, Fonts } from "values";
-import { DateUtils, AlertUtils } from "utils";
-import AgentScreen from "../AgentScreen";
-import type { AgendaItem } from "./CalendarScreenTypes";
-import styles from "./styles";
-import Bottle from "../../bottle";
-import { AgentManager, ScheduleManager } from "../../managers";
+import type {Agent} from 'types/AgentType';
+import {Text, Touchable, Loading} from 'components';
+import Container from 'components/Container';
+import WarningBannerPrompt from 'components/WarningBannerPrompt';
+import {Colors, Fonts} from 'values';
+import {DateUtils, AlertUtils} from 'utils';
+import AgentScreen from '../AgentScreen';
+import type {AgendaItem} from './CalendarScreenTypes';
+import styles from './styles';
+import Bottle from '../../bottle';
+import {AgentManager, ScheduleManager} from '../../managers';
 
 type State = {
-  agent: Agent | any,
-  agendaItems: Array<AgendaItem>,
-  isLoading: boolean,
+  agent: Agent | any;
+  agendaItems: Array<AgendaItem>;
+  isLoading: boolean;
 };
 
 type Props = {
-  navigation: NavigationScreenProp<any, any>,
+  navigation: NavigationScreenProp<any, any>;
 };
 
 class CalendarScreen extends AgentScreen {
@@ -52,9 +56,9 @@ class CalendarScreen extends AgentScreen {
       if (!this.state.agent.schedule) {
         await this.initSchedule();
       }
-      console.log("AGENT: ", this.state.agent);
+      console.log('AGENT: ', this.state.agent);
       this.parseAgendaItems(this.state.agent);
-      this.setState({ isLoading: false });
+      this.setState({isLoading: false});
     }
   }
 
@@ -64,36 +68,36 @@ class CalendarScreen extends AgentScreen {
 
   initSchedule = async () => {
     try {
-      this.setState({ isLoading: true });
+      this.setState({isLoading: true});
       await this.scheduleManager.initSchedule();
       await this.refreshAgent();
     } catch (error) {
-      AlertUtils.showSnackBar("Could not initialize schedule");
+      AlertUtils.showSnackBar('Could not initialize schedule');
     } finally {
-      this.setState({ isLoading: false });
+      this.setState({isLoading: false});
     }
   };
 
   parseAgendaItems = (agent: Agent) => {
-    const { schedule } = agent;
+    const {schedule} = agent;
     if (!schedule) {
       return;
     }
 
-    const { bookings } = schedule;
+    const {bookings} = schedule;
 
     // I am aware that this code is messy as fuck but it works ;)
     const bookingsByDate = {};
 
     // get n days from today where n gets passed into DateUtils.getDates()
-    DateUtils.getDates(7).forEach(dateStr => {
+    DateUtils.getDates(7).forEach((dateStr) => {
       bookingsByDate[dateStr] = [];
     });
 
     // group bookings by date
-    bookings.forEach(booking => {
-      const { start } = booking;
-      const dateString = new Date(start).toISOString().split("T")[0];
+    bookings.forEach((booking) => {
+      const {start} = booking;
+      const dateString = new Date(start).toISOString().split('T')[0];
 
       if (_.isEmpty(bookingsByDate[dateString])) {
         bookingsByDate[dateString] = [booking];
@@ -106,12 +110,12 @@ class CalendarScreen extends AgentScreen {
     const bookingDates = Object.keys(bookingsByDate);
 
     // format bookings into agenda items
-    bookingDates.forEach(bookingDate => {
-      const agendaItem = { title: bookingDate };
+    bookingDates.forEach((bookingDate) => {
+      const agendaItem = {title: bookingDate};
       if (_.isEmpty(bookingsByDate[bookingDate])) {
         agendaItem.data = [{}];
       } else {
-        agendaItem.data = bookingsByDate[bookingDate].map(booking => ({
+        agendaItem.data = bookingsByDate[bookingDate].map((booking) => ({
           hour: DateUtils.formatHourAMPM(new Date(booking.start)),
           duration: DateUtils.getDifferenceInWords(
             new Date(booking.end),
@@ -123,23 +127,23 @@ class CalendarScreen extends AgentScreen {
       agendaItems.push(agendaItem);
     });
 
-    this.setState({ agendaItems });
+    this.setState({agendaItems});
   };
 
   getMarkedDates = () => {
-    const { agendaItems } = this.state;
+    const {agendaItems} = this.state;
     const marked = {};
     if (_.isEmpty(agendaItems)) return marked;
-    agendaItems.forEach(item => {
+    agendaItems.forEach((item) => {
       // only mark dates with data
       if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
-        marked[item.title] = { marked: true };
+        marked[item.title] = {marked: true};
       }
     });
     return marked;
   };
 
-  itemPressed = id => {
+  itemPressed = (id) => {
     Alert.alert(id);
     // TODO, open modal or separate screen to view appointment details
   };
@@ -153,30 +157,30 @@ class CalendarScreen extends AgentScreen {
   );
 
   onWorkHoursPromptPressed = () => {
-    const { navigation } = this.props;
-    navigation.navigate("AvailabilityScreen");
+    const {navigation} = this.props;
+    navigation.navigate('AvailabilityScreen');
   };
 
   getTheme = () => ({
     // arrows
     arrowColor: Colors.black,
-    arrowStyle: { padding: 0 },
+    arrowStyle: {padding: 0},
     // month
     monthTextColor: Colors.black,
     textMonthFontSize: 16,
-    textMonthFontFamily: Fonts.regularOpenSans,
+    textMonthFontFamily: Fonts.RegularOpenSans,
     // day names
     textSectionTitleColor: Colors.black,
     textDayHeaderFontSize: 12,
-    textDayHeaderFontFamily: Fonts.semiBoldOpenSans,
+    textDayHeaderFontFamily: Fonts.SemiBoldOpenSans,
     // today
     todayBackgroundColor: Colors.secondaryDark,
     todayTextColor: Colors.white,
     // dates
     dayTextColor: Colors.primaryLight,
     textDayFontSize: 18,
-    textDayFontFamily: Fonts.boldLato,
-    textDayStyle: { marginTop: 4 },
+    textDayFontFamily: Fonts.BoldLato,
+    textDayStyle: {marginTop: 4},
     // selected date
     selectedDayBackgroundColor: Colors.primary,
     selectedDayTextColor: Colors.white,
@@ -188,7 +192,7 @@ class CalendarScreen extends AgentScreen {
     disabledDotColor: Colors.bland,
   });
 
-  renderAgendaItem = ({ item }) => {
+  renderAgendaItem = ({item}) => {
     if (_.isEmpty(item)) {
       return this.renderEmptyItem();
     }
@@ -215,18 +219,18 @@ class CalendarScreen extends AgentScreen {
   };
 
   areWorkHoursSpecified = () => {
-    const { agent } = this.state;
+    const {agent} = this.state;
 
     if (!agent) {
       return true;
     }
-    const { schedule } = agent;
+    const {schedule} = agent;
 
     return schedule && schedule.availability && schedule.availability.length;
   };
 
   render() {
-    const { agendaItems, isLoading } = this.state;
+    const {agendaItems, isLoading} = this.state;
 
     const workHoursPrompt = this.areWorkHoursSpecified() ? null : (
       <WarningBannerPrompt
@@ -239,10 +243,9 @@ class CalendarScreen extends AgentScreen {
       <Container style={styles.container}>
         <Loading isLoading={isLoading} />
         <CalendarProvider
-          theme={{ todayButtonTextColor: Colors.primary }}
+          theme={{todayButtonTextColor: Colors.primary}}
           disabledOpacity={0.6}
-          date={new Date()}
-        >
+          date={new Date()}>
           <ExpandableCalendar
             firstDay={new Date().getDay()}
             markedDates={this.getMarkedDates()}

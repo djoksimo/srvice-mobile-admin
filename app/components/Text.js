@@ -1,42 +1,49 @@
 // @flow
-import React, { PureComponent } from "react";
-import type { Node } from "react";
-import { Text as ReactNativeText, StyleSheet, View } from "react-native";
-import type { TextStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
+import React, {PureComponent} from 'react';
+import type {Node} from 'react';
+import {Text as ReactNativeText, StyleSheet, View} from 'react-native';
+import type {TextStyleProp} from 'react-native/Libraries/StyleSheet/StyleSheet';
 
-import { Colors, Fonts } from "values";
-import type { TextScale } from "types/TextScale";
+import {Colors, Fonts} from 'values';
+import type {TextScale} from 'types/TextScale';
 
 type Props = {
   // TODO: remove wherever style prop is used in other components - Danilo
-  style?: TextStyleProp,
-  scale?: TextScale | string,
-  color?: string,
-  withOptionalTag?: boolean,
-  children?: Node,
+  style?: TextStyleProp;
+  scale?: TextScale | string;
+  color?: string;
+  withOptionalTag?: boolean;
+  children?: Node;
 };
 
 class Text extends PureComponent<Props> {
   static defaultProps = {
-    scale: "",
+    scale: '',
     color: Colors.text,
     style: null,
     withOptionalTag: false,
   };
 
   static Scale: TextScale = {
-    H3: "h3",
-    H4: "h4",
-    H5: "h5",
-    H6: "h6",
-    SUBTITLE: "subtitle",
-    BODY: "body",
-    CAPTION: "caption",
-    BUTTON: "button",
+    H3: 'h3',
+    H4: 'h4',
+    H5: 'h5',
+    H6: 'h6',
+    SUBTITLE: 'subtitle',
+    BODY: 'body',
+    CAPTION: 'caption',
+    BUTTON: 'button',
   };
 
   render() {
-    const { style, scale, color, withOptionalTag, children, ...props } = this.props;
+    const {
+      style,
+      scale,
+      color,
+      withOptionalTag,
+      children,
+      ...props
+    } = this.props;
     const textStyle = [styles.base];
     switch (scale) {
       case Text.Scale.H3:
@@ -68,20 +75,21 @@ class Text extends PureComponent<Props> {
         break;
     }
     if (color) {
-      textStyle.push({ color });
+      textStyle.push({color});
     }
     if (style) {
       textStyle.push(style);
     }
 
-    const optionalText = "(Optional)";
+    const optionalText = '(Optional)';
 
     const textComponent = withOptionalTag ? (
       <View style={styles.textContainer}>
         <ReactNativeText {...props} style={textStyle}>
           {children}
         </ReactNativeText>
-        <ReactNativeText style={[styles.base, styles.caption, styles.optionalLabelContainer]}>
+        <ReactNativeText
+          style={[styles.base, styles.caption, styles.optionalLabelContainer]}>
           {optionalText}
         </ReactNativeText>
       </View>
@@ -98,32 +106,32 @@ class Text extends PureComponent<Props> {
 const styles = StyleSheet.create({
   base: {
     color: Colors.text,
-    fontFamily: Fonts.regularLato,
+    fontFamily: Fonts.RegularLato,
   },
   h3: {
     fontSize: 32,
     letterSpacing: 0,
-    fontFamily: Fonts.semiBoldOpenSans,
+    fontFamily: Fonts.SemiBoldOpenSans,
   },
   h4: {
     fontSize: 24,
     letterSpacing: 0.25,
-    fontFamily: Fonts.semiBoldOpenSans,
+    fontFamily: Fonts.SemiBoldOpenSans,
   },
   h5: {
     fontSize: 18,
     letterSpacing: 0,
-    fontFamily: Fonts.semiBoldOpenSans,
+    fontFamily: Fonts.SemiBoldOpenSans,
   },
   h6: {
     fontSize: 16,
     letterSpacing: 0.15,
-    fontFamily: Fonts.semiBoldOpenSans,
+    fontFamily: Fonts.SemiBoldOpenSans,
   },
   subtitle: {
     fontSize: 14,
     letterSpacing: 0.15,
-    fontFamily: Fonts.regularOpenSans,
+    fontFamily: Fonts.RegularOpenSans,
   },
   optionalLabelContainer: {
     marginLeft: 4,
@@ -131,22 +139,22 @@ const styles = StyleSheet.create({
   body: {
     fontSize: 12,
     letterSpacing: 0.25,
-    fontFamily: Fonts.regularLato,
+    fontFamily: Fonts.RegularLato,
     lineHeight: 18,
   },
   caption: {
     fontSize: 12,
     letterSpacing: 0.4,
-    fontFamily: Fonts.regularLato,
+    fontFamily: Fonts.RegularLato,
   },
   button: {
-    fontFamily: Fonts.semiBoldOpenSans,
+    fontFamily: Fonts.SemiBoldOpenSans,
     fontSize: 14,
     letterSpacing: 0.75,
   },
   textContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 

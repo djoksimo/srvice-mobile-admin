@@ -1,21 +1,21 @@
 // @flow
-import React from "react";
-import { View, Picker, StyleSheet } from "react-native";
+import React from 'react';
+import {View, Picker, StyleSheet} from 'react-native';
 
-import { Text, TextInput } from "components";
-import Button from "components/Button";
-import { Colors, Fonts } from "values";
+import {Text, TextInput} from 'components';
+import Button from 'components/Button';
+import {Colors, Fonts} from 'values';
 
 type Props = {
-  currentHours: number,
-  currentMinutes: number,
-  currentDays: number,
-  renderHourPickerItems: Function,
-  renderMinutePickerItems: Function,
-  onHoursChanged: Function,
-  onMinutesChanged: Function,
-  onDaysChanged: Function,
-  toggleTimeModal: Function,
+  currentHours: number;
+  currentMinutes: number;
+  currentDays: number;
+  renderHourPickerItems: Function;
+  renderMinutePickerItems: Function;
+  onHoursChanged: Function;
+  onMinutesChanged: Function;
+  onDaysChanged: Function;
+  toggleTimeModal: Function;
 };
 
 const TimeEstimate = ({
@@ -39,16 +39,14 @@ const TimeEstimate = ({
           itemStyle={styles.pickerTextStyle}
           selectedValue={currentHours}
           style={styles.picker}
-          onValueChange={onHoursChanged}
-        >
+          onValueChange={onHoursChanged}>
           {renderHourPickerItems()}
         </Picker>
         <Picker
           itemStyle={styles.pickerTextStyle}
           selectedValue={currentMinutes}
           style={styles.picker}
-          onValueChange={onMinutesChanged}
-        >
+          onValueChange={onMinutesChanged}>
           {renderMinutePickerItems()}
         </Picker>
       </View>
@@ -85,19 +83,19 @@ const styles = StyleSheet.create({
   },
   timeEstimateContainer: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   durationInputContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     flex: 1,
-    justifyContent: "space-around",
+    justifyContent: 'space-around',
   },
   picker: {
     flex: 1,
-    alignContent: "space-between",
+    alignContent: 'space-between',
   },
   pickerTextStyle: {
-    fontFamily: Fonts.regularLato,
+    fontFamily: Fonts.RegularLato,
     fontSize: 16,
     letterSpacing: 0.4,
   },
@@ -109,8 +107,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   confirmTimeButtonContainer: {
     paddingBottom: 24,

@@ -1,7 +1,6 @@
-// @flow
 class FormUtils {
   static enforceNums(text: string): string {
-    return text.replace(/[^0-9.]/g, "");
+    return text.replace(/[^0-9.]/g, '');
   }
 
   static truncateText(text: string, maxLength: number): string {
@@ -9,7 +8,7 @@ class FormUtils {
       const trimmedString = `${text.substr(0, maxLength)}...`;
       return `${trimmedString.substr(
         0,
-        Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")),
+        Math.min(trimmedString.length, trimmedString.lastIndexOf(' ')),
       )}...`;
     }
     return text;
@@ -21,28 +20,28 @@ class FormUtils {
   }
 
   static commaSeparateArray(array: Array<string>): string {
-    if (array === undefined) return "";
-    return array.join(", ");
+    if (array === undefined) return '';
+    return array.join(', ');
   }
 
   static newLineSeparateArray(array: Array<string>): string {
-    if (array === undefined) return "";
-    return array.join("\n");
+    if (array === undefined) return '';
+    return array.join('\n');
   }
 
   static pluralToSingular(text: string): string {
     if (!text) {
-      return "";
+      return '';
     }
     const lastIndex = text.length - 1;
-    if (text[lastIndex] === "s") {
+    if (text[lastIndex] === 's') {
       return text.slice(0, lastIndex);
     }
     return text;
   }
 
   static replaceNewlinesWithSpaces(text: string): string {
-    return text.replace(/\n/g, " ");
+    return text.replace(/\n/g, ' ');
   }
 
   static isValidEmailFormat(email: string): boolean {
@@ -52,7 +51,10 @@ class FormUtils {
   }
 
   static toProperCase(text: string): string {
-    return text.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    return text.replace(
+      /\w\S*/g,
+      (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(),
+    );
   }
 }
 

@@ -44,10 +44,9 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
-    "@cureapp/babel-plugin-flow-to-typescript": "^0.3.8",
     "@react-native-community/eslint-config": "^0.0.5",
-    "@steelbrain/babel-plugin-flow-to-typescript": "^0.7.0",
     "@types/jest": "^24.0.24",
+    "@types/lodash": "^4.14.149",
     "@types/react-native": "^0.60.25",
     "@types/react-native-vector-icons": "^6.4.5",
     "@types/react-test-renderer": "16.9.1",

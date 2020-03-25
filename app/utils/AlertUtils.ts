@@ -1,15 +1,14 @@
-// @flow
-import Snackbar from "react-native-snackbar";
+import Snackbar from 'react-native-snackbar';
 
-import { Colors } from "values";
+import {Colors} from 'values';
 
 class AlertUtils {
   static showSnackBar = (
-    text: string = "Something went wrong",
+    text = 'Something went wrong',
     color: string = Colors.secondaryDark,
     customAction: any = null,
   ) => {
-    const snackBarOptions = {
+    const snackBarOptions: any = {
       title: text,
       duration: Snackbar.LENGTH_LONG,
       backgroundColor: color,

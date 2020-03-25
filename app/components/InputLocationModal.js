@@ -73,7 +73,7 @@ class InputLocationModal extends Component<Props> {
           },
           description: {
             color: Colors.text,
-            fontFamily: Fonts.regularLato,
+            fontFamily: Fonts.RegularLato,
           },
         }}
         currentLocation={false}

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   pickerTextStyle: {
-    fontFamily: Fonts.regularLato,
+    fontFamily: Fonts.RegularLato,
     fontSize: 16,
     letterSpacing: 0.4,
   },

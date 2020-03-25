@@ -1,11 +1,11 @@
-import { StyleSheet } from "react-native";
-import { Dimensions, Fonts } from "values";
+import {StyleSheet} from 'react-native';
+import {Dimensions, Fonts} from 'values';
 
-const { screenWidth } = Dimensions;
+const {screenWidth} = Dimensions;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
   offeringCard: {
     flex: 1,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     marginTop: -160,
     bottom: 16,
     paddingBottom: 16,
-    alignSelf: "center",
+    alignSelf: 'center',
     paddingTop: 16,
   },
   textInput: {
@@ -31,16 +31,16 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   durationInputContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     flex: 1,
-    justifyContent: "space-around",
+    justifyContent: 'space-around',
   },
   picker: {
     flex: 1,
-    alignContent: "space-between",
+    alignContent: 'space-between',
   },
   pickerTextStyle: {
-    fontFamily: Fonts.regularLato,
+    fontFamily: Fonts.RegularLato,
     fontSize: 16,
     letterSpacing: 0.4,
   },
@@ -52,20 +52,20 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   dollarSignContainer: {
     paddingRight: 16,
   },
   buttonContainer: {
-    justifyContent: "center",
+    justifyContent: 'center',
     marginBottom: 24,
   },
   declineRespondContainer: {},
   timeEstimateContainer: {},
   timeEstimateModalContainer: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   addTimeEstimateButtonContainer: {
     paddingBottom: 24,

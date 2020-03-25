@@ -1,7 +1,6 @@
-// @flow
-import { BehaviorSubject } from "rxjs";
+import {BehaviorSubject} from 'rxjs';
 
-import { AgentService, CacheService } from "../services";
+import {AgentService, CacheService} from '../services';
 
 class AgentManager {
   agent$: BehaviorSubject;
@@ -32,7 +31,10 @@ class AgentManager {
         [field]: newData,
       };
 
-      await this.agentService.updateAgent(payload, await this.cacheService.getAuthHeader());
+      await this.agentService.updateAgent(
+        payload,
+        await this.cacheService.getAuthHeader(),
+      );
       this.agent$.next(agentCopy);
     } catch (error) {
       throw new Error(error.toString());
