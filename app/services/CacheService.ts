@@ -1,5 +1,4 @@
-//  @flow
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-community/async-storage';
 
 class CacheService {
   async set(key: string, data: any) {
@@ -15,10 +14,10 @@ class CacheService {
   }
 
   async getAuthHeader() {
-    return await {
-      agentId: await this.get("agentId"),
-      email: await this.get("email"),
-      token: await this.get("token"),
+    return {
+      agentId: await this.get('agentId'),
+      email: await this.get('email'),
+      token: await this.get('token'),
     };
   }
 }

@@ -5,7 +5,7 @@ import Modal from "react-native-modal";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { Colors } from "values";
-import type { MenuButton } from "types/MenuButtonType";
+import type { MenuButton } from "types/MenuButton";
 import { Text, Touchable, Card } from "components";
 
 type Props = {

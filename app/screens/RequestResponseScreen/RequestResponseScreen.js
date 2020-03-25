@@ -11,7 +11,7 @@ import { GradientHeader, Text, Card, Loading } from "components";
 import Button from "components/Button";
 import { FormatUtils, AlertUtils, DateUtils } from "utils";
 import Container from "components/Container";
-import type { BookingResponse } from "types/BookingResponseType";
+import type { BookingResponse } from "types/BookingResponse";
 import { Colors } from "values";
 
 import Bottle from "../../bottle";

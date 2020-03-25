@@ -26,7 +26,7 @@ import { Colors, Null, Dimensions } from "values";
 import { FormatUtils, AlertUtils } from "utils";
 import Button from "components/Button";
 import type { Service } from "types/ServiceType";
-import type { MenuButton } from "types/MenuButtonType";
+import type { MenuButton } from "types/MenuButton";
 import AgentScreen from "../AgentScreen";
 import {
   AccountHeader,

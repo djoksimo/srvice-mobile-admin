@@ -10,7 +10,7 @@ import Button from "components/Button";
 import { Colors } from "values";
 import type { Agent } from "types/AgentType";
 import type { AvailabilitySlot } from "types/AvailabilitySlot";
-import type { Day as DayType } from "types/DayType";
+import type { Day as DayType } from "types/Day";
 import { AlertUtils } from "utils";
 import AgentScreen from "../AgentScreen";
 import { DayCircles, TimeSlots } from "./AvailabilityScreenComponents";

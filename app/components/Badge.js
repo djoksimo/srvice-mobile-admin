@@ -2,7 +2,7 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View } from "react-native";
 import { Colors } from "values";
-import type { BadgeStatus } from "types/BadgeStatusType";
+import type { BadgeStatus } from "types/BadgeStatus";
 import { Text } from ".";
 
 type Props = {

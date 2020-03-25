@@ -1,7 +1,7 @@
 // @flow
 // import { BehaviorSubject } from "rxjs";
 // import type { Location } from "../StepCardTypes/LocationType";
-import type { BookingResponse } from "types/BookingResponseType";
+import type { BookingResponse } from "types/BookingResponse";
 import { CacheService, BookingService } from "../services";
 
 class BookingManager {

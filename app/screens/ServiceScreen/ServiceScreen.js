@@ -13,7 +13,7 @@ import Button from "components/Button";
 
 import { Dimensions, Colors } from "values";
 
-import type { MenuButton } from "types/MenuButtonType";
+import type { MenuButton } from "types/MenuButton";
 import type { Service } from "types/ServiceType";
 
 import { AlertUtils } from "utils";

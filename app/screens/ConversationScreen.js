@@ -7,9 +7,9 @@ import { NavigationScreenProp } from "react-navigation";
 
 import Container from "components/Container";
 import { Colors } from "values";
-import type { PusherUser } from "types/MessagingTypes/PusherUserType";
+import type { PusherUser } from "types/MessagingTypes/PusherUser";
 import type { Agent } from "types/AgentType";
-import type { PusherRoom } from "types/MessagingTypes/PusherRoomType";
+import type { PusherRoom } from "types/MessagingTypes/PusherRoom";
 import type { PusherMessage } from "types/MessagingTypes/PusherMessageType";
 import { MessagingManager } from "../managers";
 import Bottle from "../bottle";

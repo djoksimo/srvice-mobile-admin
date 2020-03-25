@@ -1,6 +1,6 @@
 // @flow
 
-import type { Day as DayType } from "types/DayType";
+import type { Day as DayType } from "types/Day";
 
 class Day {
   static SATURDAY: DayType = "Saturday";

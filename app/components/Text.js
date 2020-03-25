@@ -5,7 +5,7 @@ import { Text as ReactNativeText, StyleSheet, View } from "react-native";
 import type { TextStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
 
 import { Colors, Fonts } from "values";
-import type { TextScale } from "types/TextScaleType";
+import type { TextScale } from "types/TextScale";
 
 type Props = {
   // TODO: remove wherever style prop is used in other components - Danilo

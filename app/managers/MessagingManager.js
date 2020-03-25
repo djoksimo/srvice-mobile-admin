@@ -4,9 +4,9 @@ import { BehaviorSubject } from "rxjs";
 import { ChatManager, TokenProvider } from "@pusher/chatkit-client/dist/react-native/chatkit";
 import type { IMessage } from "react-native-gifted-chat";
 
-import type { PusherUser } from "types/MessagingTypes/PusherUserType";
-import type { PusherRoom } from "types/MessagingTypes/PusherRoomType";
-import type { PusherMessagePart } from "types/MessagingTypes/PusherMessagePartType";
+import type { PusherUser } from "types/MessagingTypes/PusherUser";
+import type { PusherRoom } from "types/MessagingTypes/PusherRoom";
+import type { PusherMessagePart } from "types/MessagingTypes/PusherMessagePart";
 import type { Agent } from "types/AgentType";
 import { EnvironmentConfig } from "../configs";
 import { CacheService, MessagingService } from "../services";

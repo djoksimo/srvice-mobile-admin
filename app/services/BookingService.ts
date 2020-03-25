@@ -1,8 +1,7 @@
-// @flow
-import { HttpUtils } from "utils";
-import type { AuthHeader } from "types/AuthHeaderType";
-import type { BookingResponse } from "types/BookingResponseType";
-import { EnvironmentConfig } from "../configs";
+import {HttpUtils} from 'utils';
+import {AuthHeader} from 'types/AuthHeader';
+import {BookingResponse} from 'types/BookingResponse';
+import {EnvironmentConfig} from '../configs';
 
 class BookingService {
   postRequestResponse(payload: BookingResponse, authHeader: AuthHeader) {
