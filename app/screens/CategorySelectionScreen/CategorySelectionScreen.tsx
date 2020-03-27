@@ -12,7 +12,7 @@ type Props = {
   navigation: NavigationScreenProp<any, any>;
 };
 type State = {
-  categories: Array<Category>;
+  categories: Category[];
   isLoading: boolean;
   error: Error | null;
 };
@@ -75,7 +75,7 @@ export class CategorySelectionScreen extends Component<Props, State> {
     const {categories, isLoading, error} = this.state;
     let categoryList: any = <View />;
 
-    if (categories) {
+    if (categories.length) {
       categoryList = categories.map((category, index) => (
         <View key={index} style={styles.item}>
           <CategorySquare
