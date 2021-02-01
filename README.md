@@ -9,6 +9,8 @@ Srvice Mobile App for Agents (service providers)
 3. Run `yarn start` in one terminal window
 4. Run `yarn run ios` in another window.
 
+If you run into any issues, try googling the error message and look for suggested fixes/solutions. Mobile development can be annoying.
+
 ---
 
 *Some links may be broken*
