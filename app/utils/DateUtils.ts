@@ -1,13 +1,8 @@
-import {
-  distanceInWordsStrict,
-  format,
-  isToday,
-  distanceInWords,
-} from 'date-fns';
+import {format, isToday, formatDistanceStrict} from 'date-fns';
 
 class DateUtils {
   static getDifferenceInWords(startTime: Date, endTime: Date): string {
-    return distanceInWordsStrict(startTime, endTime);
+    return formatDistanceStrict(endTime, startTime);
   }
 
   static getFormattedDate(date: Date): string {
