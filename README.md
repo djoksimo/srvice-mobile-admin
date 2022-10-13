@@ -36,12 +36,12 @@ Srvice aims to redesign the process of selecting, and booking services by making
 
 With verified services providers so you know who you're doing business with, and a disruptive matching system, Srvice allows you to find, schedule, and pay for a new haircut, car repair appointment or any other service.
 
-How we work 💪
+## How we work 💪
 - We stay active in the Srvice Slack Workspace and ask questions constantly!
 - We check our Trello boards to view project management updates
 - We assign ourselves to tickets and set goals based on how long we think each sprint/ticket might take
 - We design our prototypes in Figma and export them in Zeplin
-- We ask questions and post solutions to any issues in our internal Stack Overflow and we document stuff in Slite (the platform that you're on right now).
+- We ask questions and post solutions to any issues in our internal Stack Overflow and we document stuff in Slite
 - Our GitHub repos are available here. You're welcome to look through our entire codebase but please don't share anything outside of Srvice without written permission 🤫
 - Each repository should have a wiki that can be seen in GitHub or it can be found in srvice.slite.com
 e.g https://github.com/djoksimo/srvice-api/wiki
